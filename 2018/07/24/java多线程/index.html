@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种： a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个原子操">
+<meta name="description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：  a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java多线程">
 <meta property="og:url" content="http://yoursite.com/2018/07/24/java多线程/index.html">
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
-<meta property="og:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种： a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个原子操">
+<meta property="og:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：  a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-26T11:02:09.107Z">
+<meta property="og:updated_time" content="2018-07-26T11:04:27.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java多线程">
-<meta name="twitter:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种： a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个原子操">
+<meta name="twitter:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：  a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个">
 
 
 
@@ -326,12 +326,18 @@
         <h1 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h1><p>核心在于管理<strong><em>共享的</em></strong>，<strong><em>可变的</em></strong>状态<br>当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：</p>
 <ul>
 <li>修改状态为不可变对象</li>
-<li>在访问变量时使用同步机制<h1 id="原子性操作"><a href="#原子性操作" class="headerlink" title="原子性操作"></a>原子性操作</h1>不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：</li>
-<li>a++操作 实际上包含了三步：读，加，写。</li>
-<li>先检查后执行，比如延迟初始化，if(a == null)<br>要确保单个原子操作中更新所有有关的状态变量<h1 id="用锁来保护对象"><a href="#用锁来保护对象" class="headerlink" title="用锁来保护对象"></a>用锁来保护对象</h1></li>
-<li>同一个对象的读取都要同一把锁保护。</li>
-<li>同一个不变性条件涉及的对象，都要用同一把锁。<h1 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h1>很多种原因使得一个线程看不到其他线程修改变量的结果(重排序等)。JMM(java内存模型规定了JVM必须遵守的一组最小保证(happens-before)，规定了写入操作在何时对其他线程可见)。<br>happens-before:  </li>
+<li>在访问变量时使用同步机制</li>
 </ul>
+<h1 id="原子性操作"><a href="#原子性操作" class="headerlink" title="原子性操作"></a>原子性操作</h1><p>不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：</p>
+<ul>
+<li>a++操作 实际上包含了三步：读，加，写。</li>
+<li>先检查后执行，比如延迟初始化，if(a == null)<br>要确保单个原子操作中更新所有有关的状态变量</li>
+</ul>
+<h1 id="用锁来保护对象"><a href="#用锁来保护对象" class="headerlink" title="用锁来保护对象"></a>用锁来保护对象</h1><ul>
+<li>同一个对象的读取都要同一把锁保护。</li>
+<li>同一个不变性条件涉及的对象，都要用同一把锁。</li>
+</ul>
+<h1 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h1><p>很多种原因使得一个线程看不到其他线程修改变量的结果(重排序等)。JMM(java内存模型规定了JVM必须遵守的一组最小保证(happens-before)，规定了写入操作在何时对其他线程可见)。<br>happens-before:  </p>
 <ol>
 <li>程序顺序规则：同一个线程A操作在B操作之前，A对B是可见的。这是指当B有用到A的时候，不会发生重排序，没用到的时候，也可能发生重排序。只确保了逻辑上是对的，实际怎么做，是否重排序不一定。和单线程程序一样。  </li>
 <li>监视器锁规则：加锁操作能看到之前解锁操作的全部内容，是可见的。解锁操作在同一个锁加锁之前执行。  </li>
