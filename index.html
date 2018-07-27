@@ -370,12 +370,12 @@
 </ol>
 <h1 id="发布与溢出"><a href="#发布与溢出" class="headerlink" title="发布与溢出"></a>发布与溢出</h1><p>在构造函数中发布对象时，可能导致 this引用隐式溢出，因为其他的对象的方法可能会调用this对象的方法，而this还没有构造完成。可以使用工厂方法先创建对象，再发布对象，而不是在构造函数中发布。</p>
 <h1 id="安全发布"><a href="#安全发布" class="headerlink" title="安全发布"></a>安全发布</h1><p>安全发布就是既不让引用溢出，又让所有线程都要看到这个对象（此对象的可见性）。安全发布的常用模式：</p>
-<ul>
+<ol>
 <li>使用静态初始化<strong><em>static</em></strong>,stack在类初次加载时创建，只存在主内存中，所有线程都可以看到。</li>
 <li>用volatile 和 原子变量 atomic</li>
 <li>保存在某个正确构造的final域类型中，即事实不可变对象。</li>
-<li>保存在有所的容器里例如 hashtable,synchronizedMap,ConcurrentMap,CopyOnWriteArrayList,CopyOnWriteArraySet,SynchronizedList,BlockingQueue,ConcurrentLinkedQueue。  </li>
-</ul>
+<li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue </li>
+</ol>
 
           
         
