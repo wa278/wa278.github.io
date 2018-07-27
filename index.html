@@ -358,14 +358,15 @@
 <ul>
 <li>对象创建后器其状态就不能修改（不提供修改的方法）</li>
 <li>对象的所有域都是final类型</li>
-<li>对象都是正确创建的，this指针不能溢出。<br>可以使用volatile 来发布不可变对象，这样就保证了可见性。  <h1 id="发布与溢出"><a href="#发布与溢出" class="headerlink" title="发布与溢出"></a>发布与溢出</h1></li>
+<li>对象都是正确创建的，this指针不能溢出。  </li>
 </ul>
-<p>在构造函数中发布对象时，可能导致 this引用隐式溢出，因为其他的对象的方法可能会调用this对象的方法，而this还没有构造完成。可以使用工厂方法先创建对象，再发布对象，而不是在构造函数中发布。</p>
+<p>可以使用volatile 来发布不可变对象，这样就保证了可见性。  </p>
+<h1 id="发布与溢出"><a href="#发布与溢出" class="headerlink" title="发布与溢出"></a>发布与溢出</h1><p>在构造函数中发布对象时，可能导致 this引用隐式溢出，因为其他的对象的方法可能会调用this对象的方法，而this还没有构造完成。可以使用工厂方法先创建对象，再发布对象，而不是在构造函数中发布。</p>
 <h1 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h1><p>引起多线程问题的根源就是 <strong><em>共享和可变</em></strong>，不可变对象解决了<strong><em>共享</em></strong>，线程封闭解决了<strong><em>可变</em></strong>。Swing和JDBC都使用了线程封闭技术。  </p>
 <ol>
 <li>Ad-hoc 封闭 不推荐使用</li>
 <li>栈封闭 只通过局部变量才能访问对象，局部变量只有此线程此函数才能访问，所以是安全的。其他线程无法访问。</li>
-<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。Threadlocal<t> 本质是一个Map&lt;Thread,T&gt;。</t></li>
+<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。Threadlocal<t> 本质是一个Map&lt;Thread,T&gt;。  </t></li>
 </ol>
 
           
