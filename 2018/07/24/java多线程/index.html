@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
 <meta property="og:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：  a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-27T13:22:23.733Z">
+<meta property="og:updated_time" content="2018-07-27T13:24:09.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java多线程">
 <meta name="twitter:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：  a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个">
@@ -373,7 +373,7 @@
 <li>使用静态初始化<strong><em>static</em></strong>,stack在类初次加载时创建，只存在主内存中，所有线程都可以看到。</li>
 <li>用volatile 和 原子变量 atomic</li>
 <li>保存在某个正确构造的final域类型中，即事实不可变对象。</li>
-<li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue </li>
+<li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue等等。</li>
 </ol>
 
       
