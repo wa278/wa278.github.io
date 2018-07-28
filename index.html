@@ -354,28 +354,32 @@
 <li>上锁  </li>
 <li>volatile变量  </li>
 </ol>
-<h1 id="不可变对象"><a href="#不可变对象" class="headerlink" title="不可变对象"></a>不可变对象</h1><p>不可变对象的赋值操作是原子的，所以不可变对象是线程安全的。<br>不可变对象需要满足以下条件：</p>
+<h1 id="不可变对象（不可变）"><a href="#不可变对象（不可变）" class="headerlink" title="不可变对象（不可变）"></a>不可变对象（不可变）</h1><p>不可变对象的赋值操作是原子的，所以不可变对象是线程安全的。<br>不可变对象需要满足以下条件：</p>
 <ul>
 <li>对象创建后器其状态就不能修改（不提供修改的方法）</li>
 <li>对象的所有域都是final类型</li>
 <li>对象都是正确创建的，this指针不能溢出。  </li>
 </ul>
 <p>可以使用volatile 来发布不可变对象，这样就保证了可见性。  </p>
-<h1 id="事实不可变对象"><a href="#事实不可变对象" class="headerlink" title="事实不可变对象"></a>事实不可变对象</h1><p>如果对象从技术上来看是可变的，但其状态在发布后不会变化（不提供修改的方法），称为事实不可变对象，程序只需将它们视为不可变对象即可。 不可变对象需要放在final修饰词下发布。</p>
-<h1 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h1><p>引起多线程问题的根源就是 <strong><em>共享和可变</em></strong>，不可变对象解决了<strong><em>可变</em></strong>，线程封闭解决了<strong><em>共享</em></strong>。Swing和JDBC都使用了线程封闭技术。  </p>
+<h1 id="事实不可变对象（不可变）"><a href="#事实不可变对象（不可变）" class="headerlink" title="事实不可变对象（不可变）"></a>事实不可变对象（不可变）</h1><p>如果对象从技术上来看是可变的，但其状态在发布后不会变化（不提供修改的方法），称为事实不可变对象，程序只需将它们视为不可变对象即可。 不可变对象需要放在final修饰词下发布。</p>
+<h1 id="线程封闭（不共享）"><a href="#线程封闭（不共享）" class="headerlink" title="线程封闭（不共享）"></a>线程封闭（不共享）</h1><p>引起多线程问题的根源就是 <strong><em>共享和可变</em></strong>，不可变对象解决了<strong><em>可变</em></strong>，线程封闭解决了<strong><em>共享</em></strong>。Swing和JDBC都使用了线程封闭技术。  </p>
 <ol>
 <li>Ad-hoc 封闭 不推荐使用</li>
 <li>栈封闭 只通过局部变量才能访问对象，局部变量只有此线程此函数才能访问，所以是安全的。其他线程无法访问。</li>
 <li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。Threadlocal<t> 本质是一个Map&lt;Thread,T&gt;。  </t></li>
 </ol>
-<h1 id="发布与溢出"><a href="#发布与溢出" class="headerlink" title="发布与溢出"></a>发布与溢出</h1><p>在构造函数中发布对象时，可能导致 this引用隐式溢出，因为其他的对象的方法可能会调用this对象的方法，而this还没有构造完成。可以使用工厂方法先创建对象，再发布对象，而不是在构造函数中发布。</p>
-<h1 id="安全发布"><a href="#安全发布" class="headerlink" title="安全发布"></a>安全发布</h1><p>安全发布就是既不让引用溢出，又让所有线程都要看到这个对象（此对象的可见性）。安全发布的常用模式：</p>
+<h1 id="发布与溢出-（指针泄露）"><a href="#发布与溢出-（指针泄露）" class="headerlink" title="发布与溢出 （指针泄露）"></a>发布与溢出 （指针泄露）</h1><p>在构造函数中发布对象时，可能导致 this引用隐式溢出，因为其他的对象的方法可能会调用this对象的方法，而this还没有构造完成。可以使用工厂方法先创建对象，再发布对象，而不是在构造函数中发布。</p>
+<h1 id="安全发布-（可见性）"><a href="#安全发布-（可见性）" class="headerlink" title="安全发布 （可见性）"></a>安全发布 （可见性）</h1><p>安全发布就是既不让引用溢出，又让所有线程都要看到这个对象（<strong><em>此对象的可见性</em></strong>）。安全发布的常用模式：</p>
 <ol>
 <li>使用静态初始化<strong><em>static</em></strong>,stack在类初次加载时创建，只存在主内存中，所有线程都可以看到。</li>
 <li>用volatile 和 原子变量 atomic</li>
-<li>保存在某个正确构造的final域类型中，即事实不可变对象。</li>
-<li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue等等。</li>
+<li>保存在某个正确构造的final域类型中，即事实不可变对象。 （final 引用不能修改 ， 事实不可变对象也不能修改，就不存在可见性问题了）</li>
+<li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue等等。  </li>
 </ol>
+<h1 id="将非线程安全的对象变成线程安全的对象"><a href="#将非线程安全的对象变成线程安全的对象" class="headerlink" title="将非线程安全的对象变成线程安全的对象"></a>将非线程安全的对象变成线程安全的对象</h1><h2 id="实例封闭"><a href="#实例封闭" class="headerlink" title="实例封闭"></a>实例封闭</h2><p>原来这个对象O1不是线程安全的，现在把它封闭到一个新的对象O2中，并且在O2中用锁来保护对O1的操作，就变成线程安全的了，这就是实例封闭。</p>
+<p>监视器模式：把对象所有的可变状态都封装起来，并且有对象的内置锁进行保护。  </p>
+<h2 id="委托给线程安全的容器类"><a href="#委托给线程安全的容器类" class="headerlink" title="委托给线程安全的容器类"></a>委托给线程安全的容器类</h2><p>将独立的不安全的状态放在线程安全的容器内部，这样就安全了。前提是这些状态不涉及不变性条件。</p>
+<h1 id="为现有的线程安全类添加新功能"><a href="#为现有的线程安全类添加新功能" class="headerlink" title="为现有的线程安全类添加新功能"></a>为现有的线程安全类添加新功能</h1><p>组合方式：原有的方法加上一层额外的内置锁，自己写的方法也加上这个锁。当然要求是可重入的锁。</p>
 
           
         
