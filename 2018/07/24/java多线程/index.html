@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
 <meta property="og:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：  a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-28T12:19:06.969Z">
+<meta property="og:updated_time" content="2018-07-29T02:44:09.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java多线程">
 <meta name="twitter:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  原子性操作不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：  a++操作 实际上包含了三步：读，加，写。 先检查后执行，比如延迟初始化，if(a == null)要确保单个">
@@ -375,11 +375,25 @@
 <li>保存在某个正确构造的final域类型中，即事实不可变对象。 （final 引用不能修改 ， 事实不可变对象也不能修改，就不存在可见性问题了）</li>
 <li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue等等。  </li>
 </ol>
-<h1 id="将非线程安全的对象变成线程安全的对象"><a href="#将非线程安全的对象变成线程安全的对象" class="headerlink" title="将非线程安全的对象变成线程安全的对象"></a>将非线程安全的对象变成线程安全的对象</h1><h2 id="实例封闭"><a href="#实例封闭" class="headerlink" title="实例封闭"></a>实例封闭</h2><p>原来这个对象O1不是线程安全的，现在把它封闭到一个新的对象O2中，并且在O2中用锁来保护对O1的操作，就变成线程安全的了，这就是实例封闭。</p>
+<h1 id="将非线程安全的对象变成线程安全的对象"><a href="#将非线程安全的对象变成线程安全的对象" class="headerlink" title="将非线程安全的对象变成线程安全的对象"></a>将非线程安全的对象变成线程安全的对象</h1><hr>
+<h2 id="实例封闭"><a href="#实例封闭" class="headerlink" title="实例封闭"></a>实例封闭</h2><p>原来这个对象O1不是线程安全的，现在把它封闭到一个新的对象O2中，并且在O2中用锁来保护对O1的操作，就变成线程安全的了，这就是实例封闭。</p>
 <p>监视器模式：把对象所有的可变状态都封装起来，并且有对象的内置锁进行保护。  </p>
 <h2 id="委托给线程安全的容器类"><a href="#委托给线程安全的容器类" class="headerlink" title="委托给线程安全的容器类"></a>委托给线程安全的容器类</h2><p>将独立的不安全的状态放在线程安全的容器内部，这样就安全了。前提是这些状态不涉及不变性条件。</p>
-<h1 id="为现有的线程安全类添加新功能"><a href="#为现有的线程安全类添加新功能" class="headerlink" title="为现有的线程安全类添加新功能"></a>为现有的线程安全类添加新功能</h1><p>组合方式：原有的方法加上一层额外的内置锁，自己写的方法也加上这个锁。当然要求是可重入的锁。</p>
-
+<hr>
+<h1 id="为现有的线程安全类添加新功能"><a href="#为现有的线程安全类添加新功能" class="headerlink" title="为现有的线程安全类添加新功能"></a>为现有的线程安全类添加新功能</h1><p>原有方法的源码可能看不到，或者原有方法的源码上锁方式不好理解，这些都使得组合方法成为最好的选择，虽然多一层锁牺牲了性能，但是具有健壮性.</p>
+<p>组合方式：原有的方法加上一层额外的内置锁，自己写的方法也加上这个锁。当然要求是可重入的锁。</p>
+<h1 id="设计线程安全的类"><a href="#设计线程安全的类" class="headerlink" title="设计线程安全的类"></a>设计线程安全的类</h1><ol>
+<li>找出构成对象状态的所有变量</li>
+<li>找出所有的不变性条件</li>
+<li>建立对象的并发访问策略。</li>
+</ol>
+<h1 id="同步容器类"><a href="#同步容器类" class="headerlink" title="同步容器类"></a>同步容器类</h1><p>包括vetor和hashtable，这些类实现线程安全的方式是：对每个共有方法都进行同步，使得每次只有一个线程可以访问容器的状态，属于比较初级的并发容器。</p>
+<h2 id="fast-fail机制"><a href="#fast-fail机制" class="headerlink" title="fast-fail机制"></a>fast-fail机制</h2><p>在iterator遍历的过程中，不希望有其他线程修改容器的内容,会抛出ConcurrentModificationException,底层的机制是设置一个modcount变量，每次对容器进行修改，变量加一，如果在遍历的过程中发现modcount变量变化了，就抛出此异常。</p>
+<p>对整个遍历过程上锁可以解决问题，但是长时间的持有锁会降低程序的可伸缩性，如果不希望长时间加锁，可以克隆容器，在副本上进行迭代。（克隆的时候仍需要进行上锁）</p>
+<h1 id="并发容器类"><a href="#并发容器类" class="headerlink" title="并发容器类"></a>并发容器类</h1><p>并发容器类可以让多个线程实现并发的访问。比如 CopyOnWriteArrayList,ConcurrentHashMap,BlockingQueue等。</p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>采用了分段锁（Look Striping）机制调高了并发性和可伸缩性。ConcurrentHashMap采用了16个锁的数组，每个锁保护散列桶的1/16。通常执行一个操作只需要获得一个锁，但是一些方法比如clear(不要求同时获得)，reHash需要获得所有的锁。</p>
+<p>为了减少热点域(Hot Fieled)造成的可伸缩性限制，在每个分段上分别存放着size,当需要计算这个Map的size时，需要枚举每个分段的size并且相加。</p>
+<h2 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h2>
       
     </div>
     
@@ -529,7 +543,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全性"><span class="nav-number">1.</span> <span class="nav-text">线程安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原子性操作"><span class="nav-number">2.</span> <span class="nav-text">原子性操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用锁来保护对象"><span class="nav-number">3.</span> <span class="nav-text">用锁来保护对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可见性"><span class="nav-number">4.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不可变对象（不可变）"><span class="nav-number">5.</span> <span class="nav-text">不可变对象（不可变）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事实不可变对象（不可变）"><span class="nav-number">6.</span> <span class="nav-text">事实不可变对象（不可变）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程封闭（不共享）"><span class="nav-number">7.</span> <span class="nav-text">线程封闭（不共享）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布与溢出-（指针泄露）"><span class="nav-number">8.</span> <span class="nav-text">发布与溢出 （指针泄露）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全发布-（可见性）"><span class="nav-number">9.</span> <span class="nav-text">安全发布 （可见性）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将非线程安全的对象变成线程安全的对象"><span class="nav-number">10.</span> <span class="nav-text">将非线程安全的对象变成线程安全的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例封闭"><span class="nav-number">10.1.</span> <span class="nav-text">实例封闭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#委托给线程安全的容器类"><span class="nav-number">10.2.</span> <span class="nav-text">委托给线程安全的容器类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为现有的线程安全类添加新功能"><span class="nav-number">11.</span> <span class="nav-text">为现有的线程安全类添加新功能</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全性"><span class="nav-number">1.</span> <span class="nav-text">线程安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原子性操作"><span class="nav-number">2.</span> <span class="nav-text">原子性操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用锁来保护对象"><span class="nav-number">3.</span> <span class="nav-text">用锁来保护对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可见性"><span class="nav-number">4.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不可变对象（不可变）"><span class="nav-number">5.</span> <span class="nav-text">不可变对象（不可变）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事实不可变对象（不可变）"><span class="nav-number">6.</span> <span class="nav-text">事实不可变对象（不可变）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程封闭（不共享）"><span class="nav-number">7.</span> <span class="nav-text">线程封闭（不共享）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布与溢出-（指针泄露）"><span class="nav-number">8.</span> <span class="nav-text">发布与溢出 （指针泄露）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全发布-（可见性）"><span class="nav-number">9.</span> <span class="nav-text">安全发布 （可见性）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将非线程安全的对象变成线程安全的对象"><span class="nav-number">10.</span> <span class="nav-text">将非线程安全的对象变成线程安全的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例封闭"><span class="nav-number">10.1.</span> <span class="nav-text">实例封闭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#委托给线程安全的容器类"><span class="nav-number">10.2.</span> <span class="nav-text">委托给线程安全的容器类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为现有的线程安全类添加新功能"><span class="nav-number">11.</span> <span class="nav-text">为现有的线程安全类添加新功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计线程安全的类"><span class="nav-number">12.</span> <span class="nav-text">设计线程安全的类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同步容器类"><span class="nav-number">13.</span> <span class="nav-text">同步容器类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fast-fail机制"><span class="nav-number">13.1.</span> <span class="nav-text">fast-fail机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发容器类"><span class="nav-number">14.</span> <span class="nav-text">并发容器类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">14.1.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CopyOnWriteArrayList"><span class="nav-number">14.2.</span> <span class="nav-text">CopyOnWriteArrayList</span></a></li></ol></li></ol></div>
             
 
           </div>
