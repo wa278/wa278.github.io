@@ -406,7 +406,12 @@
 <h2 id="使用条件队列的标准形式"><a href="#使用条件队列的标准形式" class="headerlink" title="使用条件队列的标准形式"></a>使用条件队列的标准形式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void stateDependent() throws InterruptedException&#123;</span><br><span class="line">    synchronized(lock)&#123;               </span><br><span class="line">        //确保用相关的锁保护条件谓语的变量</span><br><span class="line">        while(!conditionPredicate())  </span><br><span class="line">        //唤醒不一定满足条件需要循环测试，因为有可能其他线程先醒了，把条件改变了。</span><br><span class="line">            lock.wait();</span><br><span class="line">            //现在对象处于合适的状态</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong><em>尽量使用notifyALL 来唤醒，因为notify只唤醒一个，容易丢失信号，陷入wait,notify丢失。比如队列里只有一个元素，调用take,这个take又唤醒了另一个take，另一个take发现条件不满足，进入wait，从此就再也不会notify.</em></strong><br><strong><em>但是这种方法有弊端，最坏的情况唤醒n个线程将需要o(n2)次操作，实际上用notify只需要o(n)次，这样会导致大量的上下文切换以及锁的竞争。</em></strong></p>
 <p>为了解决这个问题， 可以使用显示的Condition对象</p>
-<h2 id="显示的Conidtion对象"><a href="#显示的Conidtion对象" class="headerlink" title="显示的Conidtion对象"></a>显示的Conidtion对象</h2>
+<h2 id="显式的Conidtion对象"><a href="#显式的Conidtion对象" class="headerlink" title="显式的Conidtion对象"></a>显式的Conidtion对象</h2><p>Condition 是一种广义的条件队列，每一个谓语变量可以与一个condition关联起来，从而唤醒固定的队列。<strong><em>Lock.newcondition()</em></strong>创建condition,condition的方法有<strong>*await,signal,signalAll</strong>.</p>
+<p>条件谓语中包含的变量必须由LOCK守护，并在检查条件谓词和调用await,signal方法时，必须持有lock对象。</p>
+<h2 id="AbstractQueuedSynchronizer-AQS-以后用到再继续补充"><a href="#AbstractQueuedSynchronizer-AQS-以后用到再继续补充" class="headerlink" title="AbstractQueuedSynchronizer(AQS) 以后用到再继续补充"></a>AbstractQueuedSynchronizer(AQS) 以后用到再继续补充</h2><p>ReentrantLock,Semaphore等都是通过继承AQS实现的。AQS的基本操作包括各种形式的获取操作和释放操作，获取操作是一种依赖状态的操作，经常会阻塞，释放操作不是一个可以阻塞的操作。</p>
+<p>AQS负责管理同步器的状态，getState,setState,compareAndSetState等。ReentrantLock用状态表示重入该锁的次数，Semaphore表示剩余的许可数量。</p>
+<hr>
+
           
         
       
