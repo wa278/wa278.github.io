@@ -454,11 +454,29 @@
 <h2 id="关闭钩子"><a href="#关闭钩子" class="headerlink" title="关闭钩子"></a>关闭钩子</h2><p>关闭钩子就是一个线程，在正常关闭时进行扫尾工作，比如清除缓存等。关闭钩子是在Runtime.addShutdownHook注册的线程。对于一个JVM中注册的多个关闭钩子它们将会并发执行，所以JVM并不保证它们的执行顺序；由于是并发执行的，那么很可能因为代码不当导致出现竞态条件或死锁等问题，为了避免该问题，强烈建议在一个钩子中串行执行一系列操作。</p>
 <h2 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h2><p>线程可以跟两种：守护线程和普通线程。在JVM启动时，除了主线程以外，其他都是守护线程。<strong><em>新线程将继承创建它的线程的守护状态</em></strong>。</p>
 <hr>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="锁顺序死锁"><a href="#锁顺序死锁" class="headerlink" title="锁顺序死锁"></a>锁顺序死锁</h2><p>两个线程试图以不同的顺序获得相同的锁。解决方式：按相同的顺序上锁。</p>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="锁顺序死锁"><a href="#锁顺序死锁" class="headerlink" title="锁顺序死锁"></a>锁顺序死锁</h2><p>两个线程试图以不同的顺序获得相同的锁。解决方式：按相同的顺序上锁。</p>
 <h2 id="动态的锁顺序死锁"><a href="#动态的锁顺序死锁" class="headerlink" title="动态的锁顺序死锁"></a>动态的锁顺序死锁</h2><p>对函数的参数上锁，两个线程同时调用函数，参数的顺序不同。解决方法： hashcode定义参数上锁的顺序，如果hashcode相同，可以在这部分再加上新锁。</p>
 <h2 id="在协作对象之间发生死锁"><a href="#在协作对象之间发生死锁" class="headerlink" title="在协作对象之间发生死锁"></a>在协作对象之间发生死锁</h2><p>两个对象的方法在持有锁的情况下调用对方的方法，恰好对方也是这样。解决方式可以使用开放调用。</p>
 <h2 id="开放调用"><a href="#开放调用" class="headerlink" title="开放调用"></a>开放调用</h2><p>在调用某个方法时不持有锁，只对其中涉及同步的代码块上锁。在程序中应该尽量使用开放调用。</p>
-<h2 id="资源死锁"><a href="#资源死锁" class="headerlink" title="资源死锁"></a>资源死锁</h2>
+<h2 id="资源死锁"><a href="#资源死锁" class="headerlink" title="资源死锁"></a>资源死锁</h2><p>在相同的资源集合上等待，也会发生死锁。线程饥饿死锁：所有正在执行任务的线程都由于等待其他仍处于工作队列中的任务而阻塞。</p>
+<h2 id="其他活跃性危险"><a href="#其他活跃性危险" class="headerlink" title="其他活跃性危险"></a>其他活跃性危险</h2><p>饥饿，活锁，丢失信号。</p>
+<hr>
+<h1 id="性能与可伸缩性"><a href="#性能与可伸缩性" class="headerlink" title="性能与可伸缩性"></a>性能与可伸缩性</h1><p>额外的开销：线程之间的协调(例如加锁、触发信号以及内存同步)，增加的上下文切换，线程的创建与销毁，以及线程的调度等。<br>可伸缩性：当增加计算资源时，程序的吞吐量或者处理能力能相应地增加。在进行可伸缩性调优时，其目的是设法将问题的计算并行化。  </p>
+<h2 id="Amdahl定律"><a href="#Amdahl定律" class="headerlink" title="Amdahl定律"></a>Amdahl定律</h2><p>假设F是串行化的比例，最大加速比趋近于1/F。所有并发程序都包含一些串行部分，吞吐量的差异主要在于不同的串行部分。</p>
+<h2 id="线程引入的开销"><a href="#线程引入的开销" class="headerlink" title="线程引入的开销"></a>线程引入的开销</h2><p>切换上下文需要一定的开销，调度器会为每一个可运行的线程分配一个最小执行时间，将所许愿哦的数据保存到本地缓存中，保证上下文的切换。</p>
+<h2 id="内存同步"><a href="#内存同步" class="headerlink" title="内存同步"></a>内存同步</h2><p>synchronized和volatile会抑制一些编译器的优化。现代的JVM能通过优化来去掉一些不会发生竞争的锁，一些更完备的JVM能通过溢出分析，找出不会被发布的本地对象（封闭在栈区），不会进行锁操作。编译器也可以执行锁粒度粗化，将临近的同步代码块合并。</p>
+<h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>JVM在实现阻塞行为时，可以采用自旋等待（通过不断尝试获取锁，直到成功）或者通过操作系统挂起被阻塞的线程。</p>
+<h2 id="减少锁的竞争"><a href="#减少锁的竞争" class="headerlink" title="减少锁的竞争"></a>减少锁的竞争</h2><p>在锁上发生竞争将同时导致串行操作和上下文切换。<br>有三种方式可以降低锁的竞争程度：  </p>
+<ol>
+<li>减少锁的持有时间（缩小锁的范围，快进快出，将一些与锁无关的操作移除）</li>
+<li>降低锁的请求频率（锁分解，锁分段concurrentHashMap有16个锁，避免热点域）</li>
+<li>使用带有协调机制的独占锁，这些机制将允许更高的并发行。(并发容器，读写锁，不可变对象以及原子变量)</li>
+</ol>
+<hr>
+<h1 id="显式锁"><a href="#显式锁" class="headerlink" title="显式锁"></a>显式锁</h1><h2 id="Lock与ReentrantLock"><a href="#Lock与ReentrantLock" class="headerlink" title="Lock与ReentrantLock"></a>Lock与ReentrantLock</h2><p>Lock接口中定义了一组抽象的加锁操作。与内置的加锁机制不同，Lock提供一种无条件的、可轮询的、定时的、以及可中断的锁获取操作。<strong><em>必须用lock.unlock()在finally代码块里释放锁。</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface Lock&#123;</span><br><span class="line">	void lock();</span><br><span class="line">	void lockInterruptibly() throws InterruptedException;</span><br><span class="line">	boolean tryLock();</span><br><span class="line">	boolean tryLock(Long timeout, TimeUnit unit) throws InterruptedException;</span><br><span class="line">	Condition newCondition();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="轮询锁和定时锁"><a href="#轮询锁和定时锁" class="headerlink" title="轮询锁和定时锁"></a>轮询锁和定时锁</h2><p>tryLock（）在获取锁失败后返回false，不用继续等待，这样可以控制权回归。在获取多个锁时，使用tryLock可以避免死锁（得不到第二个锁，程序控制权还在，就把第一个锁也释放了）。<br>boolean tryLock(Long timeout, TimeUnit unit) 在获取不到锁时会等待一定时间，再返回。除了等待一定时间，和轮询锁一样。</p>
+<h2 id="可中断的锁获取操作"><a href="#可中断的锁获取操作" class="headerlink" title="可中断的锁获取操作"></a>可中断的锁获取操作</h2><p>请求内置锁时是不会响应中断的，void lockInterruptibly() 能够在等待获得锁的同时保持对中断的响应。定时的tryLock也能相应中断。</p>
+
           
         
       
