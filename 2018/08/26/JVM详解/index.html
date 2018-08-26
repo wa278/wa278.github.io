@@ -88,14 +88,14 @@
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
 <meta property="og:description" content="JVM的内存管理机制 线程私有的数据区 程序计数器当前线程执行字节码的行号指示器，每个线程都需要一个独立的程序计数器。如果正在执行的是Java方法，计数器记录的是虚拟机字节码指令地址。如果执行的是Native方法，计数器的值为空。唯一不会抛出OutOfMemoryError异常的区域。 虚拟机栈每个方法在执行的同时都会创建一个栈帧用于储存 局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/08/26/JVM详解/markword.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/08/26/JVM详解/类文件结构.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/08/26/JVM详解/类加载机制.png">
-<meta property="og:updated_time" content="2018-08-26T07:33:31.092Z">
+<meta property="og:image" content="http://yoursite.com/img/markword.jpg">
+<meta property="og:image" content="http://yoursite.com/img/类文件结构.jpg">
+<meta property="og:image" content="http://yoursite.com/img/类加载机制.png">
+<meta property="og:updated_time" content="2018-08-26T07:39:23.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM详解">
 <meta name="twitter:description" content="JVM的内存管理机制 线程私有的数据区 程序计数器当前线程执行字节码的行号指示器，每个线程都需要一个独立的程序计数器。如果正在执行的是Java方法，计数器记录的是虚拟机字节码指令地址。如果执行的是Native方法，计数器的值为空。唯一不会抛出OutOfMemoryError异常的区域。 虚拟机栈每个方法在执行的同时都会创建一个栈帧用于储存 局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法">
-<meta name="twitter:image" content="http://yoursite.com/2018/08/26/JVM详解/markword.jpg">
+<meta name="twitter:image" content="http://yoursite.com/img/markword.jpg">
 
 
 
@@ -392,13 +392,13 @@
 <hr>
 <h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p>对象在内存中存储的布局可以分为三个部分：对象头（header），实例数据(Instance Data),对其填充(Padding).</p>
 <h2 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h2><h3 id="1-Mark-Word"><a href="#1-Mark-Word" class="headerlink" title="1 Mark Word"></a>1 Mark Word</h3><p>用于储存对象自身的运行时数据，如哈希码、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳。Mark Word 在32位和64位虚拟机中分别为32bit和64bit.  </p>
-<p><img src="./markword.jpg" alt="avatar"></p>
+<p><img src="/img/markword.jpg" alt="avatar"></p>
 <h3 id="类型指针"><a href="#类型指针" class="headerlink" title="类型指针"></a>类型指针</h3><p>对象指向它的类元数据（方法区的类信息）的指针，虚拟机通过这个指针确定对象的类型。如果对象是Java数组，那么对象头需要一块记录数组长度的数据。  </p>
 <h2 id="实例数据部分"><a href="#实例数据部分" class="headerlink" title="实例数据部分"></a>实例数据部分</h2><p>储存对象的各类型实例数据（包括父类定义的），储存顺序会受到虚拟机分配策略参数和字段在Java源码中定义的顺序影响。</p>
 <h2 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h2><p>必须是8字节的整数倍。32位机对象头是32+32，64位机64+64，在不开启指针压缩的条件下。</p>
 <hr>
 <h1 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h1><p>类文件格式采用两种数据类型存储：无符号数（u1,u2,u4,u8）和表。无符号数可以用来描述数字、索引引用、数量值、按照UTF-8编码构成的字符串。</p>
-<p><img src="./类文件结构.jpg" alt="avatar"></p>
+<p><img src="/img/类文件结构.jpg" alt="avatar"></p>
 <h2 id="魔数-4字节-CAFABABE-咖啡宝贝"><a href="#魔数-4字节-CAFABABE-咖啡宝贝" class="headerlink" title="魔数 4字节 CAFABABE 咖啡宝贝"></a>魔数 4字节 CAFABABE 咖啡宝贝</h2><h2 id="常量池计数器"><a href="#常量池计数器" class="headerlink" title="常量池计数器"></a>常量池计数器</h2><p>特点是从一开始，2个字节。</p>
 <h2 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h2><p>存放两大类常量：字面量和符号引用。</p>
 <ol>
@@ -407,7 +407,7 @@
 </ol>
 <hr>
 <h1 id="虚拟机类加载机制"><a href="#虚拟机类加载机制" class="headerlink" title="虚拟机类加载机制"></a>虚拟机类加载机制</h1><p>类加载的生命周期包括：加载（loading），验证(verification)，准备(preparation)，解析(resolution)，初始化(initialization)，使用(using)，卸载(unloading)。其中验证，准备，解析三个阶段被称为连接。</p>
-<p><img src="./类加载机制.png" alt="avator"></p>
+<p><img src="/img/类加载机制.png" alt="avator"></p>
 <h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><ol>
 <li>通过一个类的全称限定名来获取定义此类的二进制字节流。</li>
 <li>将静态存储结构转化为方法区的运行时数据结构（静态常量池转化为运行时常量池）</li>
