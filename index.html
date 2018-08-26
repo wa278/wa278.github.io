@@ -253,6 +253,238 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/26/JVM详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/source/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang Ao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/JVM详解/" itemprop="url">JVM详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T15:32:44+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="JVM的内存管理机制"><a href="#JVM的内存管理机制" class="headerlink" title="JVM的内存管理机制"></a>JVM的内存管理机制</h1><hr>
+<p>线程私有的数据区</p>
+<h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>当前线程执行字节码的行号指示器，每个线程都需要一个独立的程序计数器。如果正在执行的是Java方法，计数器记录的是虚拟机字节码指令地址。如果执行的是Native方法，计数器的值为空。唯一不会抛出OutOfMemoryError异常的区域。</p>
+<h2 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧用于储存 局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法调用直至执行完成的过程，对应一个栈帧在虚拟机栈中入栈到出栈的过程。局部变量表在编译器就在class对象里面分配完成了，大小是确定的。</p>
+<h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><p>本地方法栈为虚拟机使用到的Native方法服务。</p>
+<hr>
+<p>所有线程共享的数据区</p>
+<h2 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h2><p>Java堆是虚拟机管理内存最大的一块，被所有线程共享，在虚拟机启动的时候创建，存放对象实例。Java堆还可以细分为新生代和老年代。新生代还可以分为:Eden空间，From Survivor空间和To Survivor空间。class对象也存在于堆中。</p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>被各个线程共享，存储已被虚拟机加载的类信息（不是class对象）、常量、静态变量、即时编译器JIT编译的代码等数据。HotSpot虚拟机将方法区称为永久代。JDK1.7已经把放在永久代的字符串常量池移出。</p>
+<p>运行时常量池也是方法区的一部分。class文件中的静态常量池也会在类加载后进入运行时常量池存放。</p>
+<hr>
+<h1 id="垃圾收集器与内存分配策略"><a href="#垃圾收集器与内存分配策略" class="headerlink" title="垃圾收集器与内存分配策略"></a>垃圾收集器与内存分配策略</h1><h2 id="引用计数法与可达性分析法"><a href="#引用计数法与可达性分析法" class="headerlink" title="引用计数法与可达性分析法"></a>引用计数法与可达性分析法</h2><p>引用记数法：给对象添加一个引用计数器值就加一，引用失效计器值就减一，计数器为0对象就要回收。python等语言采用了引用计数法进行内存管理。Java没有采用主要是因为没有办法解决对象之间相互循环引用的问题</p>
+<p>可达性分析算法：以GC　root　作为起始点进行可达性分析。可作为GC root对象包括下面几种：</p>
+<ol>
+<li>虚拟机栈（栈帧中的局部变量表）引用的对象。</li>
+<li>方法区中的类静态属性引用的对象。</li>
+<li>方法区中的常量引用的对象</li>
+<li>本地方法栈中native方法引用的对象。</li>
+</ol>
+<h2 id="两次标记过程"><a href="#两次标记过程" class="headerlink" title="两次标记过程"></a>两次标记过程</h2><p>对象回收会经过两次标记过程，在进行可达性分析后如果没有和GC roots相连，会被第一次标记。如果没有覆盖过finalize（）或者finalize（）执行过一次（只可以执行一次），久会等待被回收。否则进入F-queue，在第二次标记之前，如果执行了finalize（）方法使得有引用指向对象，自救成功。否则被第二次标记，等待回收。finalizer线程不保证一定执行finalize（）方法。<br>不推荐使用finalize方法。</p>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><p>一般新生代会使用复制算法，老年代会使用标记清除算法或者标记整理算法。</p>
+<h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><p>分为标记，清除两个阶段。主要不足有两个：1 效率问题，两个阶段的效率都不高。2 空间问题，产生大量不连续的内存碎片，导致以后需要分配较大对象时，无法找到连续内存不得不提前触发垃圾收集。</p>
+<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>按照8：1：1 将新生代分为Eden和survivor空间。至多会有10%的内存空间浪费。当survivor空间不够时，需要依赖老年代分配担保。</p>
+<h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><p>与标记清除算法一样，但是让存活的对象都向一端移动，直接清理掉边界以外的内存。</p>
+<hr>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p>新生代收集器</p>
+<h3 id="serial收集器"><a href="#serial收集器" class="headerlink" title="serial收集器"></a>serial收集器</h3><p>最基本的单线程收集器，在其进行垃圾回收时，必须暂停其他手游工作的线程，“stop the world”.目前仍然是虚拟机在client模式下的默认新生代收集器。</p>
+<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>ParNew收集器是Serial的多线程版本，基本上完全一样。除了Serial收集器之外，只有它可以与CMS收集器一同工作。</p>
+<h3 id="Parallel-Scavenge-收集器"><a href="#Parallel-Scavenge-收集器" class="headerlink" title="Parallel Scavenge 收集器"></a>Parallel Scavenge 收集器</h3><p>Parallel Scavenge 也是一个新生代采用复制算法的多线程收集器，看上去和ParNew一样，但是其目标是达到一个可控制的吞吐量。使收集的效率高，但不一定stop the world 时间最短。</p>
+<hr>
+<p>老年代收集器</p>
+<h3 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h3><p>serial old 是老年代的单线程收集器，使用标记-整理算法。用途是作为CMS收集器的后备预案，在CMS发生Concurrent Mode Failure 时使用。</p>
+<h3 id="ParNew-Old-收集器"><a href="#ParNew-Old-收集器" class="headerlink" title="ParNew Old 收集器"></a>ParNew Old 收集器</h3><p>ParNew Old 可以与 parallel scavenge 配合使用，在看重吞吐量和CPU资源敏感的场合下，都可以使用parallel scavenge 和 Parnew old 组合。</p>
+<h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>CMS收集器是一种以获得最短回收停顿时间为目标的收集器，在注重响应速度的服务上，很适合使用。CMS基于标记清除算法，整个过程分为四个步骤：</p>
+<ol>
+<li>初始标记</li>
+<li>并发标记（时间最长）</li>
+<li>重新标记</li>
+<li>并发清除（时间最长）  </li>
+</ol>
+<p>初始标记和重新标记仍然需要stop the world，耗时最长的并发标记和并发清除可以和用户线程一起执行。</p>
+<p>三个明显缺点：</p>
+<ol>
+<li>CPU敏感，回收线程=（CPU数量+3）/4 .</li>
+<li>无法处理浮动垃圾 并发清理阶段用户线程还在继续制造垃圾，CMS无法在当次收集中处理它们，这部分垃圾叫做浮动垃圾。因为CMS无法等老年代满了进行GC，而是预留一部分空间（92%）提前发生GC，当预留的空间无法满足程序要求，就会产生Concurrent Mode Failure ，虚拟机将临时启用 serial old 代替 CMS。</li>
+<li>因为基于标记清理算法，有大量空间碎片产生</li>
+</ol>
+<h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3><p>G1收集器有如下特点：</p>
+<ol>
+<li>并发与并行</li>
+<li>分代收集 不需要配合其他收集器就可以独自管理整个堆。</li>
+<li>空间整合 从整体上看是标记-整理算法，从局部上看是复制算法。</li>
+<li>可预测的停顿 明确在长度为M的时间上收集时间不超过N毫秒。<br>将整个Java堆分成多个大小相等的独立区域（Region）,虽然保留新生代，老年代的概念，但是不是物理隔离的，它们都是一部分region的集合。每次根据允许的收集时间，优先回收价值最大的Region。</li>
+</ol>
+<hr>
+<h2 id="内存分配和回收策略"><a href="#内存分配和回收策略" class="headerlink" title="内存分配和回收策略"></a>内存分配和回收策略</h2><ol>
+<li>对象优先在Eden区分配，当Eden区没有足够的空间时，虚拟机发起一次minorGC</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活的对象进入老年代</li>
+<li>动态对象年龄判定，如果Survivor空间中相同年龄的所有对象大小的总和大于Survivor空间的一半，大于或等于该年龄的对象直接进入老年代。</li>
+<li>空间分配担保。在发生minorGC之前会检查老年代最大可用的连续空间是否大于新生代所有对象的总空间，如果这个条件成立，说明MinorGC是安全的。如果不允许担保失败，就改成FullGC。如果允许担保失败，则继续检查老年代最大可用的连续空间是否大于历次紧急老年代对象的平均大小，尝试进行一次MinorGC</li>
+</ol>
+<hr>
+<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p>对象在内存中存储的布局可以分为三个部分：对象头（header），实例数据(Instance Data),对其填充(Padding).</p>
+<h2 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h2><h3 id="1-Mark-Word"><a href="#1-Mark-Word" class="headerlink" title="1 Mark Word"></a>1 Mark Word</h3><p>用于储存对象自身的运行时数据，如哈希码、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳。Mark Word 在32位和64位虚拟机中分别为32bit和64bit.  </p>
+<p><img src="./markword.jpg" alt="avatar"></p>
+<h3 id="类型指针"><a href="#类型指针" class="headerlink" title="类型指针"></a>类型指针</h3><p>对象指向它的类元数据（方法区的类信息）的指针，虚拟机通过这个指针确定对象的类型。如果对象是Java数组，那么对象头需要一块记录数组长度的数据。  </p>
+<h2 id="实例数据部分"><a href="#实例数据部分" class="headerlink" title="实例数据部分"></a>实例数据部分</h2><p>储存对象的各类型实例数据（包括父类定义的），储存顺序会受到虚拟机分配策略参数和字段在Java源码中定义的顺序影响。</p>
+<h2 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h2><p>必须是8字节的整数倍。32位机对象头是32+32，64位机64+64，在不开启指针压缩的条件下。</p>
+<hr>
+<h1 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h1><p>类文件格式采用两种数据类型存储：无符号数（u1,u2,u4,u8）和表。无符号数可以用来描述数字、索引引用、数量值、按照UTF-8编码构成的字符串。</p>
+<p><img src="./类文件结构.jpg" alt="avatar"></p>
+<h2 id="魔数-4字节-CAFABABE-咖啡宝贝"><a href="#魔数-4字节-CAFABABE-咖啡宝贝" class="headerlink" title="魔数 4字节 CAFABABE 咖啡宝贝"></a>魔数 4字节 CAFABABE 咖啡宝贝</h2><h2 id="常量池计数器"><a href="#常量池计数器" class="headerlink" title="常量池计数器"></a>常量池计数器</h2><p>特点是从一开始，2个字节。</p>
+<h2 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h2><p>存放两大类常量：字面量和符号引用。</p>
+<ol>
+<li>字面量：文本字符串、声明为final类型的常量值。</li>
+<li>符号引用：类和接口的全限定名，字段的名称和描述符，方法的名称和描述符。</li>
+</ol>
+<hr>
+<h1 id="虚拟机类加载机制"><a href="#虚拟机类加载机制" class="headerlink" title="虚拟机类加载机制"></a>虚拟机类加载机制</h1><p>类加载的生命周期包括：加载（loading），验证(verification)，准备(preparation)，解析(resolution)，初始化(initialization)，使用(using)，卸载(unloading)。其中验证，准备，解析三个阶段被称为连接。</p>
+<p><img src="./类加载机制.png" alt="avator"></p>
+<h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><ol>
+<li>通过一个类的全称限定名来获取定义此类的二进制字节流。</li>
+<li>将静态存储结构转化为方法区的运行时数据结构（静态常量池转化为运行时常量池）</li>
+<li>在堆中生成一个class对象，作为方法区这个类的各种数据访问入口（存着类属性和方法的指针）。虚拟机常量池中的数据结构不会直接暴露给Java，是通过class对象暴露的。</li>
+</ol>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>确保class文件的字节流 符合当前虚拟机的要求。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>正式为类变量分配内存，这些内存都在方法区，通常情况下是数据类型的0值。如果类变量是static final 类型的，就是定义值。</p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>将虚拟机常量池内的符号引用替换为直接引用。  </p>
+<p>类或接口解析  （把类的符号引用转化为对应类的地址）</p>
+<p>假设当前代码所属类为D,要把一个符号引用解析为N解析为类C，那么虚拟机将会把代表N的全限定名传给D的类加载器去加载类C。在这个阶段，可能会触发其他相关类的加载，产生连环加载。  </p>
+<p>字段解析  （目的是把字段的符号引用写为字段表里对应字段的地址）</p>
+<p>首先会对字段表内class——index项中的索引项CONSTANT——Class_info符号引用进行解析，把这个字段所属类解析出来C（比如Books.number 就在索引项里找Books，并且加载），如果C中含有想匹配的字段，查找结束。否则，按照从下到上的顺序查找接口，如果没有，从下到上顺序查找父类。  </p>
+<p>类方法解析  （目的是把方法的符号引用写为方法表里对应方法的地址）</p>
+<p>首先解析方法所属的类C，与字段解析一样，找不到则递归查找C的父类。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><ol>
+<li>之前都是类加载器主导的过程，这里开始真正执行Java的程序。<br>初始化阶段执行类构造器clinit（）方法，对类变量进行赋值动作和静态语句块执行。  </li>
+<li>定义在静态语句块之后的变量，在前面的静态语句块可以赋值，但是不能访问。虚拟机会保证子类的clinit（）方法执行之前，父类的clinit（）方法执行完毕。第一个执行的clinit（）方法一定是Object的clinit（）方法方法。  </li>
+<li>clinit（）方法不是必须的，如果没有静态语句块也没有类变量，那么就不会生成clinit（）方法方法。  </li>
+<li>执行接口的clinit（）方法不需要先执行父接口的clinit（）方法，只有当父接口中定义的变量被使用时，父接口才会被初始化。  </li>
+<li>虚拟机会保证一个类的clinit（）方法在多线程环境中被正确地加锁和同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的clinit（）方法。</li>
+</ol>
+<hr>
+<h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><p>类加载器通过一个类的全限定名来获取描述此类的二进制字节流。对于任意一个类，类加载器和这个类本身一同确定其在Java虚拟机中的唯一性，即同一个class文件被两个不同的类加载器加载出来，这两个类就是不同的。  </p>
+<h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>从Java虚拟机角度将，只存在两种类加载器：启动类加载器（C++实现，虚拟机自身的一部分），其他类加载器（Java实现，继承自抽象类java.lang.ClassLoader）。</p>
+<p>从Java开发人员角度讲，可以分为三种：</p>
+<ol>
+<li>启动类加载器(Bootstrap ClassLoader)</li>
+<li>扩展类加载器(Extension ClassLoader)</li>
+<li>应用程序类加载器(Application ClassLoader) 这个类加载器是ClassLoader中getSystemClassLoader()方法的返回值，一边也成为系统类加载器。如果没有自定义过类加载器，这个就是程序中默认的类加载器。</li>
+</ol>
+<p>双亲委派模型要求除了顶层的启动类加载器外，其余的类加载器都应当有自己的父类加载器。如果一个加载器收到了类加载请求，会把这个请求委派给父类加载器去完成，只有父类无法完成时，子加载器才会加载。classLoad（）方法实现。</p>
+<p>双亲委派模型保证了在不重写classLoad（）的情况下，类是唯一的。<br>能不能自己写一个String类？<br>答： 双亲委派模型决定了同一个类只会由同一个类加载器加载，所以自己写了一个同名类，也不会被顶层的类加载器加载。但是如果自定义类加载器，并且重写classload方法，绕开双亲委派模型，就可以。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/java多线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -689,7 +921,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
