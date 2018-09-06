@@ -253,6 +253,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/SQL语句/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang Ao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/06/SQL语句/" itemprop="url">SQL语句</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-06T19:30:45+08:00">
+                2018-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SQL语法-MySQL"><a href="#SQL语法-MySQL" class="headerlink" title="SQL语法(MySQL)"></a>SQL语法(MySQL)</h1><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO tablename VALUES (value1,value2);//插入一行</span><br><span class="line">INSERT INTO tablename(columnname1, columnname2) VALUES(value1,value2);//插入一行的某些列，其余NULL.</span><br><span class="line"></span><br><span class="line">DETELE FROM tablename WHERE expression;//删除某一行数据，要想删除某一行的一列，使用UPDATE</span><br><span class="line"></span><br><span class="line">UPDATE tablename SET columnname = newValue WHERE expression;//修改某一列数据</span><br><span class="line"></span><br><span class="line">SELECT columnname FROM tablename; </span><br><span class="line">SELECT columnname FROM tablename,limit 5; //只选择前几行</span><br><span class="line">SELECT DISTINCT columnname FROM tablename; //列出不同的值，相同元素不列出。</span><br><span class="line">SELECT columnname FROM tabename WHERE expression; //WHERE 只能对行进行过滤，不能过滤分组</span><br><span class="line">SELECT columnname FROM tablename GROUP BY columnname;//对数据进行分组</span><br><span class="line">SELECT columnname FROM tablename GROUP BY columnname having expression;// having 对分组进行过滤</span><br><span class="line">AND OR 运算符 AND 优先级高于OR</span><br><span class="line">SELECT columnname FROM tablename ORDER BY columnname;//升序显示</span><br><span class="line">SELECT columnname FROM tablename ORDER BY columnname DESC;//降序显示</span><br><span class="line">SELECT columnname INTO tablename2 FROM tablename1; // 复制表</span><br></pre></td></tr></table></figure>
+<h3 id="其他操作符"><a href="#其他操作符" class="headerlink" title="其他操作符"></a>其他操作符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">IN 用于在WHERE子句后规定多个值，简化WHERE子句的写法，更清楚直观</span><br><span class="line">WHERE columnname IN(value1,value2,value3);</span><br><span class="line"></span><br><span class="line">BETWEEN 取两值之间的数据</span><br><span class="line">WHERE columnname BETWEEN value1 AND value2;</span><br><span class="line"></span><br><span class="line">ALIAS 为列和表指定别名</span><br><span class="line">columnname AS 别名</span><br><span class="line">tablename AS 别名</span><br></pre></td></tr></table></figure>
+<h3 id="SQL-join"><a href="#SQL-join" class="headerlink" title="SQL join"></a>SQL join</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">用于根据两个或多个表中的列之间的关系，从中查询数据。是关系型数据库最强大的功能，虚拟，消耗资源。</span><br><span class="line">JOIN = INNER 如果表中至少有一个匹配，则返回行。</span><br><span class="line">LEFT JOIN 返回左表的全部行，如果右表没有匹配就返回null。</span><br><span class="line">RIGHT JOIN 返回右表的全部行，如果左表没有匹配就返回null。</span><br><span class="line">FULL JOIN 返回左右表的全部行，如果另一个表没有匹配就返回null。</span><br><span class="line">SELECT tablename.columnname FROM tablename JOIN tablename ON expression;</span><br></pre></td></tr></table></figure>
+<h3 id="SQL-union"><a href="#SQL-union" class="headerlink" title="SQL union"></a>SQL union</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用于合并两个或多个SQL语句的结果集，相同项只会显示一次。</span><br><span class="line">SELECT columnname FROM tablename1 UNION SELECT columnname FROM tablename2;</span><br><span class="line">如果想列出所有的值，使用UNION ALL</span><br></pre></td></tr></table></figure>
+<h2 id="表-增删改复制"><a href="#表-增删改复制" class="headerlink" title="表(增删改复制)"></a>表(增删改复制)</h2><h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE tablename(</span><br><span class="line">    columnname1     datatype, DEFAULT defaultnumber</span><br><span class="line">    columnname2     datatype，AUTO_INCREMENT</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE tablename;</span><br></pre></td></tr></table></figure>
+<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tablename ADD COLUMN columnname datatype;</span><br><span class="line">ALTER TABLE tablename DROP COLUMN columnname;</span><br></pre></td></tr></table></figure>
+<h3 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE tablename AS SELECT * FROM tablename;</span><br></pre></td></tr></table></figure>
+<h2 id="SQL-约束"><a href="#SQL-约束" class="headerlink" title="SQL 约束"></a>SQL 约束</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">NOT NULL </span><br><span class="line">UNIQUE</span><br><span class="line">PRIMARY KEY</span><br><span class="line">FOREIGN KEY</span><br><span class="line">CHECK</span><br><span class="line">DEFAULT</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(columnname)</span><br><span class="line">UNIQUE (columnname)</span><br><span class="line">CHECK (expression)</span><br><span class="line">FOREIGN KEY (columnname) REFERENCE tablename(columnname).</span><br><span class="line"></span><br><span class="line">增加约束名</span><br><span class="line">CONSTRAINT constraintname PRIMARY KEY(columnname)</span><br><span class="line"></span><br><span class="line">表已经建立添加约束</span><br><span class="line">ALTER TABLE tablename ADD PRIMARY KEY(columnname)</span><br><span class="line">或者</span><br><span class="line">ALTER TABLE tablename ADD CONSTRAINT constraintname PRIMARY KEY(columnname)</span><br><span class="line"></span><br><span class="line">删除约束</span><br><span class="line">ALTER TABLE tablename DROP PRIMARY KEY.</span><br></pre></td></tr></table></figure>
+<h2 id="SQL-视图"><a href="#SQL-视图" class="headerlink" title="SQL 视图"></a>SQL 视图</h2><p>视图是虚拟的表，主要的作用是复用SQL查询语句，本质就是查询语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW viewname AS SELECT columnname FROM tabename WHERE expression;</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQL-索引"><a href="#SQL-索引" class="headerlink" title="SQL 索引"></a>SQL 索引</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON tablename(columnname) </span><br><span class="line">唯一索引</span><br><span class="line">CREATE UNIQUE INDEX index_name ON tablename(columnname)</span><br></pre></td></tr></table></figure>
+<h2 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BEGIN or START TRANSACTION //开启事物</span><br><span class="line">ROLLBACK    //回滚</span><br><span class="line">COMMIT      //提交</span><br></pre></td></tr></table></figure>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER // 修改分隔符为//</span><br><span class="line">  CREATE PROCEDURE myproc(OUT s int) //创建存储过程</span><br><span class="line">    BEGIN</span><br><span class="line">      SELECT COUNT(*) INTO s FROM students;</span><br><span class="line">    END</span><br><span class="line">    //</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+<p>在mysql中可以call myproc （@参数）</p>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER //</span><br><span class="line">CREATE TRIGGER trigger_name trigger_time trigger_event ON tablename FOR EACH ROW </span><br><span class="line">BEGIN</span><br><span class="line">//语句</span><br><span class="line">END</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+<p>trigger_name 触发器名字<br>trigger_time 触发器时间  BEFORE AFTER<br>trigger_event 触发事件 INSERT DELETE UPDATE</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/Java代理模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1085,7 +1220,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
