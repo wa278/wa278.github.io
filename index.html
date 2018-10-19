@@ -874,14 +874,14 @@
 <li>栈封闭 只通过局部变量才能访问对象，局部变量只有此线程此函数才能访问，所以是安全的。其他线程无法访问。</li>
 <li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。Threadlocal<t> 本质是一个Map&lt;Thread,T&gt;。  </t></li>
 </ol>
-<h1 id="原子性操作"><a href="#原子性操作" class="headerlink" title="原子性操作"></a>原子性操作</h1><p>不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：</p>
+<h1 id="用锁来保护对象（可变，共享）"><a href="#用锁来保护对象（可变，共享）" class="headerlink" title="用锁来保护对象（可变，共享）"></a>用锁来保护对象（可变，共享）</h1><ul>
+<li>同一个对象的读取都要同一把锁保护。</li>
+<li>同一个不变性条件涉及的对象，都要用同一把锁。</li>
+</ul>
+<h2 id="原子性操作"><a href="#原子性操作" class="headerlink" title="原子性操作"></a>原子性操作</h2><p>不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：</p>
 <ul>
 <li>a++操作 实际上包含了三步：读，加，写。</li>
 <li>先检查后执行，比如延迟初始化，if(a == null)<br>要确保单个原子操作中更新所有有关的状态变量</li>
-</ul>
-<h1 id="用锁来保护对象"><a href="#用锁来保护对象" class="headerlink" title="用锁来保护对象"></a>用锁来保护对象</h1><ul>
-<li>同一个对象的读取都要同一把锁保护。</li>
-<li>同一个不变性条件涉及的对象，都要用同一把锁。</li>
 </ul>
 <h1 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h1><p>很多种原因使得一个线程看不到其他线程修改变量的结果(重排序等)。JMM(java内存模型规定了JVM必须遵守的一组最小保证(happens-before)，规定了写入操作在何时对其他线程可见)。<br>happens-before:  </p>
 <ol>
