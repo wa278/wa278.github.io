@@ -860,6 +860,20 @@
 <li>修改状态为不可变对象</li>
 <li>在访问变量时使用同步机制</li>
 </ul>
+<h1 id="不可变对象（不可变）"><a href="#不可变对象（不可变）" class="headerlink" title="不可变对象（不可变）"></a>不可变对象（不可变）</h1><p>不可变对象的赋值操作是原子的，所以不可变对象是线程安全的。<br>不可变对象需要满足以下条件：</p>
+<ul>
+<li>对象创建后器其状态就不能修改（不提供修改的方法）</li>
+<li>对象的所有域都是final类型</li>
+<li>对象都是正确创建的，this指针不能溢出。  </li>
+</ul>
+<p>可以使用volatile 来发布不可变对象，这样就保证了可见性。  </p>
+<h1 id="事实不可变对象（不可变）"><a href="#事实不可变对象（不可变）" class="headerlink" title="事实不可变对象（不可变）"></a>事实不可变对象（不可变）</h1><p>如果对象从技术上来看是可变的，但其状态在发布后不会变化（不提供修改的方法），称为事实不可变对象，程序只需将它们视为不可变对象即可。 不可变对象需要放在final修饰词下发布。</p>
+<h1 id="线程封闭（不共享）"><a href="#线程封闭（不共享）" class="headerlink" title="线程封闭（不共享）"></a>线程封闭（不共享）</h1><p>引起多线程问题的根源就是 <strong><em>共享和可变</em></strong>，不可变对象解决了<strong><em>可变</em></strong>，线程封闭解决了<strong><em>共享</em></strong>。Swing和JDBC都使用了线程封闭技术。  </p>
+<ol>
+<li>Ad-hoc 封闭 通过编程实现封闭，不推荐使用，但也是最常用的封闭。</li>
+<li>栈封闭 只通过局部变量才能访问对象，局部变量只有此线程此函数才能访问，所以是安全的。其他线程无法访问。</li>
+<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。Threadlocal<t> 本质是一个Map&lt;Thread,T&gt;。  </t></li>
+</ol>
 <h1 id="原子性操作"><a href="#原子性操作" class="headerlink" title="原子性操作"></a>原子性操作</h1><p>不正确的进行原子性操作，容易发生竞态条件（Race Condition）,常见的竞态条件有如下两种：</p>
 <ul>
 <li>a++操作 实际上包含了三步：读，加，写。</li>
@@ -885,24 +899,10 @@
 <li>上锁  </li>
 <li>volatile变量  </li>
 </ol>
-<h1 id="不可变对象（不可变）"><a href="#不可变对象（不可变）" class="headerlink" title="不可变对象（不可变）"></a>不可变对象（不可变）</h1><p>不可变对象的赋值操作是原子的，所以不可变对象是线程安全的。<br>不可变对象需要满足以下条件：</p>
-<ul>
-<li>对象创建后器其状态就不能修改（不提供修改的方法）</li>
-<li>对象的所有域都是final类型</li>
-<li>对象都是正确创建的，this指针不能溢出。  </li>
-</ul>
-<p>可以使用volatile 来发布不可变对象，这样就保证了可见性。  </p>
-<h1 id="事实不可变对象（不可变）"><a href="#事实不可变对象（不可变）" class="headerlink" title="事实不可变对象（不可变）"></a>事实不可变对象（不可变）</h1><p>如果对象从技术上来看是可变的，但其状态在发布后不会变化（不提供修改的方法），称为事实不可变对象，程序只需将它们视为不可变对象即可。 不可变对象需要放在final修饰词下发布。</p>
-<h1 id="线程封闭（不共享）"><a href="#线程封闭（不共享）" class="headerlink" title="线程封闭（不共享）"></a>线程封闭（不共享）</h1><p>引起多线程问题的根源就是 <strong><em>共享和可变</em></strong>，不可变对象解决了<strong><em>可变</em></strong>，线程封闭解决了<strong><em>共享</em></strong>。Swing和JDBC都使用了线程封闭技术。  </p>
-<ol>
-<li>Ad-hoc 封闭 不推荐使用</li>
-<li>栈封闭 只通过局部变量才能访问对象，局部变量只有此线程此函数才能访问，所以是安全的。其他线程无法访问。</li>
-<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。Threadlocal<t> 本质是一个Map&lt;Thread,T&gt;。  </t></li>
-</ol>
 <h1 id="发布与溢出-（指针泄露）"><a href="#发布与溢出-（指针泄露）" class="headerlink" title="发布与溢出 （指针泄露）"></a>发布与溢出 （指针泄露）</h1><p>在构造函数中发布对象时，可能导致 this引用隐式溢出，因为其他的对象的方法可能会调用this对象的方法，而this还没有构造完成。可以使用工厂方法先创建对象，再发布对象，而不是在构造函数中发布。</p>
-<h1 id="安全发布-（可见性）"><a href="#安全发布-（可见性）" class="headerlink" title="安全发布 （可见性）"></a>安全发布 （可见性）</h1><p>安全发布就是既不让引用溢出，又让所有线程都要看到这个对象（<strong><em>此对象的可见性</em></strong>）。安全发布的常用模式：</p>
+<h1 id="安全发布-（创建一个对象，可见性）"><a href="#安全发布-（创建一个对象，可见性）" class="headerlink" title="安全发布 （创建一个对象，可见性）"></a>安全发布 （创建一个对象，可见性）</h1><p>安全发布就是既不让引用溢出，又让所有线程都要看到这个对象（<strong><em>此对象的可见性</em></strong>）。安全发布的常用模式：</p>
 <ol>
-<li>使用静态初始化<strong><em>static</em></strong>,stack在类初次加载时创建，只存在主内存中，所有线程都可以看到。</li>
+<li>使用静态初始化<strong><em>static</em></strong>,静态对象在类被加载时创建，存在方法区，JVM内部会保证只有一个线程会创建对象，但是在以后使用时候不能保证像volatile一样的可见性，也会拷贝一份进线程的虚拟机栈。</li>
 <li>用volatile 和 原子变量 atomic</li>
 <li>保存在某个正确构造的final域类型中，即事实不可变对象。 （final 引用不能修改 ， 事实不可变对象也不能修改，就不存在可见性问题了）</li>
 <li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue等等。  </li>
@@ -919,7 +919,7 @@
 <li>找出所有的不变性条件</li>
 <li>建立对象的并发访问策略。</li>
 </ol>
-<h1 id="同步容器类"><a href="#同步容器类" class="headerlink" title="同步容器类"></a>同步容器类</h1><p>包括vetor和hashtable，这些类实现线程安全的方式是：对每个共有方法都进行同步，使得每次只有一个线程可以访问容器的状态，属于比较初级的并发容器。</p>
+<h1 id="同步容器类"><a href="#同步容器类" class="headerlink" title="同步容器类"></a>同步容器类</h1><p>包括vetor和hashtable，这些类实现线程安全的方式是：对每个共有方法都进行同步，使得每次只有一个线程可以访问容器的状态，属于比较初级的并发容器。<br>ConcurrentModificationException会在这类初级的同步容器类迭代不加锁的时候抛出。包括容器的equal,hashcode,containsall,removeall,以及System out 都会包含隐形迭代</p>
 <hr>
 <h2 id="fast-fail机制"><a href="#fast-fail机制" class="headerlink" title="fast-fail机制"></a>fast-fail机制</h2><p>在iterator遍历的过程中，不希望有其他线程修改容器的内容,会抛出ConcurrentModificationException,底层的机制是设置一个modcount变量，每次对容器进行修改，变量加一，如果在遍历的过程中发现modcount变量变化了，就抛出此异常。</p>
 <p>对整个遍历过程上锁可以解决问题，但是长时间的持有锁会降低程序的可伸缩性，如果不希望长时间加锁，可以克隆容器，在副本上进行迭代。（克隆的时候仍需要进行上锁）</p>
