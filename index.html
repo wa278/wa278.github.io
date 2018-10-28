@@ -253,6 +253,125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/26/高性能Mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang Ao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/26/高性能Mysql/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T20:34:41+08:00">
+                2018-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/SQL语句/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -638,14 +757,14 @@
 <li>方法区中的常量引用的对象</li>
 <li>本地方法栈中native方法引用的对象。</li>
 </ol>
-<h2 id="两次标记过程"><a href="#两次标记过程" class="headerlink" title="两次标记过程"></a>两次标记过程</h2><p>对象回收会经过两次标记过程，在进行可达性分析后如果没有和GC roots相连，会被第一次标记。如果没有覆盖过finalize（）或者finalize（）执行过一次（只可以执行一次），久会等待被回收。否则进入F-queue，在第二次标记之前，如果执行了finalize（）方法使得有引用指向对象，自救成功。否则被第二次标记，等待回收。finalizer线程不保证一定执行finalize（）方法。<br>不推荐使用finalize方法。</p>
+<h2 id="两次标记过程"><a href="#两次标记过程" class="headerlink" title="两次标记过程"></a>两次标记过程</h2><p>对象回收会经过两次标记过程，在进行可达性分析后如果没有和GC roots相连，会被第一次标记。如果没有覆盖过finalize（）或者finalize（）执行过一次（只可以执行一次），就会等待被回收。否则进入F-queue，在第二次标记之前，如果执行了finalize（）方法使得有引用指向对象，自救成功。否则被第二次标记，等待回收。finalizer线程不保证一定执行finalize（）方法。<br>不推荐使用finalize方法。</p>
 <h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><p>一般新生代会使用复制算法，老年代会使用标记清除算法或者标记整理算法。</p>
 <h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><p>分为标记，清除两个阶段。主要不足有两个：1 效率问题，两个阶段的效率都不高。2 空间问题，产生大量不连续的内存碎片，导致以后需要分配较大对象时，无法找到连续内存不得不提前触发垃圾收集。</p>
 <h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>按照8：1：1 将新生代分为Eden和survivor空间。至多会有10%的内存空间浪费。当survivor空间不够时，需要依赖老年代分配担保。</p>
 <h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><p>与标记清除算法一样，但是让存活的对象都向一端移动，直接清理掉边界以外的内存。</p>
 <hr>
 <h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p>新生代收集器</p>
-<h3 id="serial收集器"><a href="#serial收集器" class="headerlink" title="serial收集器"></a>serial收集器</h3><p>最基本的单线程收集器，在其进行垃圾回收时，必须暂停其他手游工作的线程，“stop the world”.目前仍然是虚拟机在client模式下的默认新生代收集器。</p>
+<h3 id="serial收集器"><a href="#serial收集器" class="headerlink" title="serial收集器"></a>serial收集器</h3><p>最基本的单线程收集器，在其进行垃圾回收时，必须暂停其他所有工作的线程，“stop the world”.目前仍然是虚拟机在client模式下的默认新生代收集器。</p>
 <h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>ParNew收集器是Serial的多线程版本，基本上完全一样。除了Serial收集器之外，只有它可以与CMS收集器一同工作。</p>
 <h3 id="Parallel-Scavenge-收集器"><a href="#Parallel-Scavenge-收集器" class="headerlink" title="Parallel Scavenge 收集器"></a>Parallel Scavenge 收集器</h3><p>Parallel Scavenge 也是一个新生代采用复制算法的多线程收集器，看上去和ParNew一样，但是其目标是达到一个可控制的吞吐量。使收集的效率高，但不一定stop the world 时间最短。</p>
 <hr>
@@ -1221,7 +1340,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
