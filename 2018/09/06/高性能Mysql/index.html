@@ -81,14 +81,19 @@
 
 
 
+<meta name="description" content="MySQL架构Mysql逻辑架构 最上层有连接处理，授权认证，安全等功能。 第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。 第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高性能Mysql">
 <meta property="og:url" content="http://yoursite.com/2018/09/06/高性能Mysql/index.html">
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
+<meta property="og:description" content="MySQL架构Mysql逻辑架构 最上层有连接处理，授权认证，安全等功能。 第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。 第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-28T02:25:28.621Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/img/Mysql服务器逻辑架构图.png">
+<meta property="og:updated_time" content="2018-10-28T12:39:53.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能Mysql">
+<meta name="twitter:description" content="MySQL架构Mysql逻辑架构 最上层有连接处理，授权认证，安全等功能。 第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。 第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/06/img/Mysql服务器逻辑架构图.png">
 
 
 
@@ -320,7 +325,28 @@
       
 
       
-        
+        <h1 id="MySQL架构"><a href="#MySQL架构" class="headerlink" title="MySQL架构"></a>MySQL架构</h1><h3 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h3><p><img src="../img/Mysql服务器逻辑架构图.png" alt="avator"></p>
+<p>最上层有连接处理，授权认证，安全等功能。</p>
+<p>第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。</p>
+<p>第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服务器的请求。</p>
+<h3 id="表锁和行级锁"><a href="#表锁和行级锁" class="headerlink" title="表锁和行级锁"></a>表锁和行级锁</h3><p>MySQL中最基本的锁策略，开销最小，会锁定整张表，是一种读写锁。</p>
+<p>行级锁可以最大程度地支持并发处理，同时也带来最大的锁开销，InnoDB实现了行级锁。行级锁只在储存引擎实现，服务器层没有实现。</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>InnoDB是事务数据库，MyISAM是非事务型数据库。</p>
+<p>ACID</p>
+<ul>
+<li>A:atomicity 原子性<br>一个事务必须被视为一个不可分割的最小工作单元，要么全部提交成功，要么全部失败回滚。</li>
+<li>C:consistency 一致性<br>数据库总是从一个一致性状态转换到另一个一致性的状态。</li>
+<li>I:isolation 隔离性<br>通常来说 一个事务所作的修改在最终提交之前，对其他事务是不可见的。涉及隔离级别的问题，详情参考下文。</li>
+<li><p>D:durability 持久性<br>一旦事务提交，则其所作的修改就会永久保存到数据库中。即使此刻数据库崩溃，修改的数据也不会丢失。也分为不同级别，不可能百分之百持久性保证。大多数数据库都会使用事务日志，存储引擎在修改表的数据时只需要修改其内存拷贝，再把修改行为记录到持久在硬盘上的事务日志中。事务日志采取追加的方式，因此是顺序IO,不需要在频繁移动磁头。事务日志持久以后，内存中被修改的数据可以在后台慢慢地刷回磁盘。<br>把这种实现方式称之为预写式日志，修改数据需要写2次磁盘。</p>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3></li>
+<li><p>READ UNCOMMITTED(未提交读)<br>事务中的修改即使没提交，对其他事务也都是可见的。会产生 脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据</p>
+</li>
+<li>READ COMMITTED(提交读)<br>大多数数据库的默认隔离级别都是提交读，只有自己能看见已经提交的修改，会导致 不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。</li>
+<li>REPEATABLE READ(可重复读) Mysql的默认所级别<br>该级别保证在同一个事务中多次读取同样的记录结果是一致的。但是无法解决 幻读：事务A在读取某个范围内的数据时，事务B在这个范围内插入了新的记录，事务A再次读取该范围的数据时，会产生幻行。InnoDB是在使用索引的时候是行级锁,next-key(间隙锁)解决了幻读问题。不使用索引的时候是表锁。</li>
+<li>SERIALIZABLE(可串行化)<br>强制所有事务串行化执行。</li>
+</ul>
+<h2 id="多版本并发控制-MVCC，实现高并发"><a href="#多版本并发控制-MVCC，实现高并发" class="headerlink" title="多版本并发控制(MVCC，实现高并发)"></a>多版本并发控制(MVCC，实现高并发)</h2><p>InnoDB的MVCC，是通过在每行后面保存两个隐藏的列来实现的，一列保存了行的创建时间(系统版本号)，一个保存行的过期时间（系统版本号）。每开启一个事务，系统版本号都会自动递增。</p>
+
       
     </div>
     
@@ -344,8 +370,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/27/Java代理模式/" rel="next" title="Java代理模式">
-                <i class="fa fa-chevron-left"></i> Java代理模式
+              <a href="/2018/09/06/Java集合类详解/" rel="next" title="Java集合类详解">
+                <i class="fa fa-chevron-left"></i> Java集合类详解
               </a>
             
           </div>
@@ -408,8 +434,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -455,6 +490,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL架构"><span class="nav-number">1.</span> <span class="nav-text">MySQL架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql逻辑架构"><span class="nav-number">1.0.1.</span> <span class="nav-text">Mysql逻辑架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁和行级锁"><span class="nav-number">1.0.2.</span> <span class="nav-text">表锁和行级锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离级别"><span class="nav-number">1.1.1.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多版本并发控制-MVCC，实现高并发"><span class="nav-number">1.2.</span> <span class="nav-text">多版本并发控制(MVCC，实现高并发)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
