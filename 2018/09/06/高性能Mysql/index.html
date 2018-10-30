@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="MySQL架构Mysql逻辑架构 最上层有连接处理，授权认证，安全等功能。 第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。 第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服">
+<meta name="description" content="MySQL架构- [Mysql逻辑架构](#mysql逻辑架构) - [表锁和行级锁](#表锁和行级锁)  事务 隔离级别   多版本并发控制(MVCC，实现高并发)   Schema与数据类型优化 优化数据类型 整数类型 字符串类型 BLOB和TEXT类型 使用枚举代替字符串类型 日期和时间类型 范式   创建高性能索引 高性能索引策略 聚簇索引   查询性能优化 优化数据访问 查询执行的基">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高性能Mysql">
 <meta property="og:url" content="http://yoursite.com/2018/09/06/高性能Mysql/index.html">
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
-<meta property="og:description" content="MySQL架构Mysql逻辑架构 最上层有连接处理，授权认证，安全等功能。 第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。 第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服">
+<meta property="og:description" content="MySQL架构- [Mysql逻辑架构](#mysql逻辑架构) - [表锁和行级锁](#表锁和行级锁)  事务 隔离级别   多版本并发控制(MVCC，实现高并发)   Schema与数据类型优化 优化数据类型 整数类型 字符串类型 BLOB和TEXT类型 使用枚举代替字符串类型 日期和时间类型 范式   创建高性能索引 高性能索引策略 聚簇索引   查询性能优化 优化数据访问 查询执行的基">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/09/06/img/Mysql服务器逻辑架构图.png">
-<meta property="og:updated_time" content="2018-10-28T12:39:53.659Z">
+<meta property="og:updated_time" content="2018-10-30T07:51:56.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能Mysql">
-<meta name="twitter:description" content="MySQL架构Mysql逻辑架构 最上层有连接处理，授权认证，安全等功能。 第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。 第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服">
+<meta name="twitter:description" content="MySQL架构- [Mysql逻辑架构](#mysql逻辑架构) - [表锁和行级锁](#表锁和行级锁)  事务 隔离级别   多版本并发控制(MVCC，实现高并发)   Schema与数据类型优化 优化数据类型 整数类型 字符串类型 BLOB和TEXT类型 使用枚举代替字符串类型 日期和时间类型 范式   创建高性能索引 高性能索引策略 聚簇索引   查询性能优化 优化数据访问 查询执行的基">
 <meta name="twitter:image" content="http://yoursite.com/2018/09/06/img/Mysql服务器逻辑架构图.png">
 
 
@@ -325,7 +325,41 @@
       
 
       
-        <h1 id="MySQL架构"><a href="#MySQL架构" class="headerlink" title="MySQL架构"></a>MySQL架构</h1><h3 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h3><p><img src="../img/Mysql服务器逻辑架构图.png" alt="avator"></p>
+        <!-- TOC -->
+<ul>
+<li><a href="#mysql架构">MySQL架构</a><pre><code>- [Mysql逻辑架构](#mysql逻辑架构)
+- [表锁和行级锁](#表锁和行级锁)
+</code></pre><ul>
+<li><a href="#事务">事务</a><ul>
+<li><a href="#隔离级别">隔离级别</a></li>
+</ul>
+</li>
+<li><a href="#多版本并发控制mvcc实现高并发">多版本并发控制(MVCC，实现高并发)</a></li>
+</ul>
+</li>
+<li><a href="#schema与数据类型优化">Schema与数据类型优化</a><ul>
+<li><a href="#优化数据类型">优化数据类型</a></li>
+<li><a href="#整数类型">整数类型</a></li>
+<li><a href="#字符串类型">字符串类型</a></li>
+<li><a href="#blob和text类型">BLOB和TEXT类型</a></li>
+<li><a href="#使用枚举代替字符串类型">使用枚举代替字符串类型</a></li>
+<li><a href="#日期和时间类型">日期和时间类型</a></li>
+<li><a href="#范式">范式</a></li>
+</ul>
+</li>
+<li><a href="#创建高性能索引">创建高性能索引</a><ul>
+<li><a href="#高性能索引策略">高性能索引策略</a></li>
+<li><a href="#聚簇索引">聚簇索引</a></li>
+</ul>
+</li>
+<li><a href="#查询性能优化">查询性能优化</a><ul>
+<li><a href="#优化数据访问">优化数据访问</a></li>
+<li><a href="#查询执行的基础">查询执行的基础</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="MySQL架构"><a href="#MySQL架构" class="headerlink" title="MySQL架构"></a>MySQL架构</h1><h3 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h3><p><img src="../img/Mysql服务器逻辑架构图.png" alt="avator"></p>
 <p>最上层有连接处理，授权认证，安全等功能。</p>
 <p>第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。</p>
 <p>第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服务器的请求。</p>
@@ -346,6 +380,52 @@
 <li>SERIALIZABLE(可串行化)<br>强制所有事务串行化执行。</li>
 </ul>
 <h2 id="多版本并发控制-MVCC，实现高并发"><a href="#多版本并发控制-MVCC，实现高并发" class="headerlink" title="多版本并发控制(MVCC，实现高并发)"></a>多版本并发控制(MVCC，实现高并发)</h2><p>InnoDB的MVCC，是通过在每行后面保存两个隐藏的列来实现的，一列保存了行的创建时间(系统版本号)，一个保存行的过期时间（系统版本号）。每开启一个事务，系统版本号都会自动递增。</p>
+<h1 id="Schema与数据类型优化"><a href="#Schema与数据类型优化" class="headerlink" title="Schema与数据类型优化"></a>Schema与数据类型优化</h1><h2 id="优化数据类型"><a href="#优化数据类型" class="headerlink" title="优化数据类型"></a>优化数据类型</h2><ul>
+<li>更小的通常更好  占用更少的磁盘、内存和CPU缓存</li>
+<li>简单就好  整形比字符串操作代价更低</li>
+<li>尽量避免NULL NULL的列使得索引、索引统计和值都更复杂</li>
+</ul>
+<h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><p>对于储存和计算来说，INT(1) 和 INT(20)是相同的，都占用32位。</p>
+<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><p>VARchar 需要使用1或两个额外字节记录字符串长度。</p>
+<ul>
+<li>使用VARCHAR 字符串列的最大长度比平均长度大很多</li>
+<li>列的更新很少，碎拼不是问题</li>
+<li>像UTF-8 每个字符都使用不同的字节压缩</li>
+</ul>
+<h2 id="BLOB和TEXT类型"><a href="#BLOB和TEXT类型" class="headerlink" title="BLOB和TEXT类型"></a>BLOB和TEXT类型</h2><p>都是为存储很大的数据而设计的字符串数据类型，分别采用二进制和字符方式存储。</p>
+<h2 id="使用枚举代替字符串类型"><a href="#使用枚举代替字符串类型" class="headerlink" title="使用枚举代替字符串类型"></a>使用枚举代替字符串类型</h2><p>Mysql会在内部将每个值在列表中的位置保存为整数，并在表的.frm文件中保存数字-字符串映射关系的查找表。枚举字段是按照内部存储的数字而不是定义的字符串进行排序的。</p>
+<h2 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h2><ul>
+<li>DATETIME 能保存大范围的值，从1001年到9999年，精度为秒。格式为YYYYMMDDHHMMSS，与时区无关，采用８个字节存储。</li>
+<li>TIMESTAMP 保存从1970年1月1号到现在的秒数，采用4个字节存储，比DATETIME 空间效率高</li>
+</ul>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><h1 id="创建高性能索引"><a href="#创建高性能索引" class="headerlink" title="创建高性能索引"></a>创建高性能索引</h1><p>InnoDB使用B+Tree,根据主键引用被索引的行。  </p>
+<p>对索引列是按顺序组织存储的，所以很适合查找范围数据。  </p>
+<p>B-Tree适用与全键值、键值范围或键前缀查找。</p>
+<p>InnoDB有一个特殊的功能叫做“自适应哈希索引”。 在检测到某些索引使用频繁时，在B-tree的基础上再创建一个哈希索引。</p>
+<p>MyISAM索引通过数据的物理位置引用被索引的行。</p>
+<h2 id="高性能索引策略"><a href="#高性能索引策略" class="headerlink" title="高性能索引策略"></a>高性能索引策略</h2><ul>
+<li>索引不能是表达式的一部分，也不能是函数的参数。</li>
+<li>使用多列索引。 索引合并技术（两个索引查找 结果 用UNION 合并，否则就是全表扫描）有可能是一种优化结果，也说明了索引建的糟糕</li>
+<li>选择合适的索引列顺序</li>
+</ul>
+<h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><p>在同一个结构中保存了索引和数据行，一个表只能有一个聚簇索引。其他的都是二级索引，保存着主键值。</p>
+<p>MyISAM 不是聚簇索引，数据按照插入顺序存储在硬盘上，索引里存放着数据的行号。</p>
+<h1 id="查询性能优化"><a href="#查询性能优化" class="headerlink" title="查询性能优化"></a>查询性能优化</h1><h2 id="优化数据访问"><a href="#优化数据访问" class="headerlink" title="优化数据访问"></a>优化数据访问</h2><p>从好到坏依次是：</p>
+<ul>
+<li><p>在索引中使用where 条件来过滤不匹配的记录，这是在存储引擎层完成的</p>
+</li>
+<li><p>使用索引扫描覆盖（Using Index）来返回记录，直接从索引中过滤掉不需要的记录并返回命中结果。这是在Mysql服务器层完成的，无需回表查询数据</p>
+</li>
+<li><p>从数据表中返回数据，然后过滤掉不满足条件的记录（Using where）。这是在Mysql服务器层完成的。</p>
+</li>
+</ul>
+<h2 id="查询执行的基础"><a href="#查询执行的基础" class="headerlink" title="查询执行的基础"></a>查询执行的基础</h2><ol>
+<li>客户端发送一条查询给服务器</li>
+<li>服务器先检查查询缓存，如果命中了缓存，则立刻返回存储在缓存中的结果。缓存是用哈希实现的。</li>
+<li>服务器进行SQL解析，预处理，再由优化器生成执行计划</li>
+<li>Mysql根据优化器生成的执行计划，调用存储引擎的API来执行查询。</li>
+<li>将返回结果给客户端</li>
+</ol>
 
       
     </div>
@@ -370,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/06/Java集合类详解/" rel="next" title="Java集合类详解">
-                <i class="fa fa-chevron-left"></i> Java集合类详解
+              <a href="/2018/09/06/SQL语句/" rel="next" title="SQL语句">
+                <i class="fa fa-chevron-left"></i> SQL语句
               </a>
             
           </div>
@@ -380,8 +460,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/06/SQL语句/" rel="prev" title="SQL语句">
-                SQL语句 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/06/Java集合类详解/" rel="prev" title="Java集合类详解">
+                Java集合类详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -500,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL架构"><span class="nav-number">1.</span> <span class="nav-text">MySQL架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql逻辑架构"><span class="nav-number">1.0.1.</span> <span class="nav-text">Mysql逻辑架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁和行级锁"><span class="nav-number">1.0.2.</span> <span class="nav-text">表锁和行级锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离级别"><span class="nav-number">1.1.1.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多版本并发控制-MVCC，实现高并发"><span class="nav-number">1.2.</span> <span class="nav-text">多版本并发控制(MVCC，实现高并发)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL架构"><span class="nav-number">1.</span> <span class="nav-text">MySQL架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql逻辑架构"><span class="nav-number">1.0.1.</span> <span class="nav-text">Mysql逻辑架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁和行级锁"><span class="nav-number">1.0.2.</span> <span class="nav-text">表锁和行级锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离级别"><span class="nav-number">1.1.1.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多版本并发控制-MVCC，实现高并发"><span class="nav-number">1.2.</span> <span class="nav-text">多版本并发控制(MVCC，实现高并发)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Schema与数据类型优化"><span class="nav-number">2.</span> <span class="nav-text">Schema与数据类型优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">优化数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数类型"><span class="nav-number">2.2.</span> <span class="nav-text">整数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串类型"><span class="nav-number">2.3.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BLOB和TEXT类型"><span class="nav-number">2.4.</span> <span class="nav-text">BLOB和TEXT类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用枚举代替字符串类型"><span class="nav-number">2.5.</span> <span class="nav-text">使用枚举代替字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期和时间类型"><span class="nav-number">2.6.</span> <span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范式"><span class="nav-number">2.7.</span> <span class="nav-text">范式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建高性能索引"><span class="nav-number">3.</span> <span class="nav-text">创建高性能索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能索引策略"><span class="nav-number">3.1.</span> <span class="nav-text">高性能索引策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚簇索引"><span class="nav-number">3.2.</span> <span class="nav-text">聚簇索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询性能优化"><span class="nav-number">4.</span> <span class="nav-text">查询性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化数据访问"><span class="nav-number">4.1.</span> <span class="nav-text">优化数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询执行的基础"><span class="nav-number">4.2.</span> <span class="nav-text">查询执行的基础</span></a></li></ol></li></ol></div>
             
 
           </div>
