@@ -89,7 +89,7 @@
 <meta property="og:description" content="MySQL架构- [Mysql逻辑架构](#mysql逻辑架构) - [表锁和行级锁](#表锁和行级锁)  事务 隔离级别   多版本并发控制(MVCC，实现高并发)   Schema与数据类型优化 优化数据类型 整数类型 字符串类型 BLOB和TEXT类型 使用枚举代替字符串类型 日期和时间类型 范式   创建高性能索引 高性能索引策略 聚簇索引   查询性能优化 优化数据访问 查询执行的基">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/09/06/img/Mysql服务器逻辑架构图.png">
-<meta property="og:updated_time" content="2018-10-30T07:51:56.826Z">
+<meta property="og:updated_time" content="2018-11-01T09:58:31.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能Mysql">
 <meta name="twitter:description" content="MySQL架构- [Mysql逻辑架构](#mysql逻辑架构) - [表锁和行级锁](#表锁和行级锁)  事务 隔离级别   多版本并发控制(MVCC，实现高并发)   Schema与数据类型优化 优化数据类型 整数类型 字符串类型 BLOB和TEXT类型 使用枚举代替字符串类型 日期和时间类型 范式   创建高性能索引 高性能索引策略 聚簇索引   查询性能优化 优化数据访问 查询执行的基">
@@ -355,6 +355,8 @@
 <li><a href="#查询性能优化">查询性能优化</a><ul>
 <li><a href="#优化数据访问">优化数据访问</a></li>
 <li><a href="#查询执行的基础">查询执行的基础</a></li>
+<li><a href="#查询优化处理">查询优化处理</a></li>
+<li><a href="#mysql-关联查询">Mysql 关联查询</a></li>
 </ul>
 </li>
 </ul>
@@ -426,7 +428,17 @@
 <li>Mysql根据优化器生成的执行计划，调用存储引擎的API来执行查询。</li>
 <li>将返回结果给客户端</li>
 </ol>
-
+<h2 id="查询优化处理"><a href="#查询优化处理" class="headerlink" title="查询优化处理"></a>查询优化处理</h2><ul>
+<li>重新定义关联表的顺序</li>
+<li>将外连接转化为一个内连接</li>
+<li>等式的等价变换</li>
+<li>优化Count,Min,Max,使用索引。</li>
+<li>覆盖索引扫描</li>
+<li>子查询优化，将子查询转换成一种效率更高的形式，减少多次子查询。</li>
+<li>提前终止查询。</li>
+<li>In会先排序，然后采用二分查找，比用OR快。</li>
+</ul>
+<h2 id="Mysql-关联查询"><a href="#Mysql-关联查询" class="headerlink" title="Mysql 关联查询"></a>Mysql 关联查询</h2>
       
     </div>
     
@@ -450,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/06/SQL语句/" rel="next" title="SQL语句">
-                <i class="fa fa-chevron-left"></i> SQL语句
+              <a href="/2018/08/27/Java代理模式/" rel="next" title="Java代理模式">
+                <i class="fa fa-chevron-left"></i> Java代理模式
               </a>
             
           </div>
@@ -460,8 +472,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/06/Java集合类详解/" rel="prev" title="Java集合类详解">
-                Java集合类详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/06/SQL语句/" rel="prev" title="SQL语句">
+                SQL语句 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -543,7 +555,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -580,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL架构"><span class="nav-number">1.</span> <span class="nav-text">MySQL架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql逻辑架构"><span class="nav-number">1.0.1.</span> <span class="nav-text">Mysql逻辑架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁和行级锁"><span class="nav-number">1.0.2.</span> <span class="nav-text">表锁和行级锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离级别"><span class="nav-number">1.1.1.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多版本并发控制-MVCC，实现高并发"><span class="nav-number">1.2.</span> <span class="nav-text">多版本并发控制(MVCC，实现高并发)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Schema与数据类型优化"><span class="nav-number">2.</span> <span class="nav-text">Schema与数据类型优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">优化数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数类型"><span class="nav-number">2.2.</span> <span class="nav-text">整数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串类型"><span class="nav-number">2.3.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BLOB和TEXT类型"><span class="nav-number">2.4.</span> <span class="nav-text">BLOB和TEXT类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用枚举代替字符串类型"><span class="nav-number">2.5.</span> <span class="nav-text">使用枚举代替字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期和时间类型"><span class="nav-number">2.6.</span> <span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范式"><span class="nav-number">2.7.</span> <span class="nav-text">范式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建高性能索引"><span class="nav-number">3.</span> <span class="nav-text">创建高性能索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能索引策略"><span class="nav-number">3.1.</span> <span class="nav-text">高性能索引策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚簇索引"><span class="nav-number">3.2.</span> <span class="nav-text">聚簇索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询性能优化"><span class="nav-number">4.</span> <span class="nav-text">查询性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化数据访问"><span class="nav-number">4.1.</span> <span class="nav-text">优化数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询执行的基础"><span class="nav-number">4.2.</span> <span class="nav-text">查询执行的基础</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL架构"><span class="nav-number">1.</span> <span class="nav-text">MySQL架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql逻辑架构"><span class="nav-number">1.0.1.</span> <span class="nav-text">Mysql逻辑架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁和行级锁"><span class="nav-number">1.0.2.</span> <span class="nav-text">表锁和行级锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离级别"><span class="nav-number">1.1.1.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多版本并发控制-MVCC，实现高并发"><span class="nav-number">1.2.</span> <span class="nav-text">多版本并发控制(MVCC，实现高并发)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Schema与数据类型优化"><span class="nav-number">2.</span> <span class="nav-text">Schema与数据类型优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">优化数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数类型"><span class="nav-number">2.2.</span> <span class="nav-text">整数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串类型"><span class="nav-number">2.3.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BLOB和TEXT类型"><span class="nav-number">2.4.</span> <span class="nav-text">BLOB和TEXT类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用枚举代替字符串类型"><span class="nav-number">2.5.</span> <span class="nav-text">使用枚举代替字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期和时间类型"><span class="nav-number">2.6.</span> <span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范式"><span class="nav-number">2.7.</span> <span class="nav-text">范式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建高性能索引"><span class="nav-number">3.</span> <span class="nav-text">创建高性能索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能索引策略"><span class="nav-number">3.1.</span> <span class="nav-text">高性能索引策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚簇索引"><span class="nav-number">3.2.</span> <span class="nav-text">聚簇索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询性能优化"><span class="nav-number">4.</span> <span class="nav-text">查询性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化数据访问"><span class="nav-number">4.1.</span> <span class="nav-text">优化数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询执行的基础"><span class="nav-number">4.2.</span> <span class="nav-text">查询执行的基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询优化处理"><span class="nav-number">4.3.</span> <span class="nav-text">查询优化处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-关联查询"><span class="nav-number">4.4.</span> <span class="nav-text">Mysql 关联查询</span></a></li></ol></li></ol></div>
             
 
           </div>
