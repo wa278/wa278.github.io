@@ -81,14 +81,17 @@
 
 
 
+<meta name="description" content="计算机系统基础信息（位与上下文）像源文件这样由ASCII字符构成的文件称为文本文件，其他所有文件都称为二进制文件。 在不同的上下文中，一个同样的字节序列可能表示不同的信息。信息是由位（字节序列）和上下文决定的。 程序被翻译成不同的格式以C语言为例 最初始 .c文件  预处理阶段 读取 include&amp;lt;stdio.h&amp;gt;的内容，并且把它直接插入到程序文本中。 .i文件 编译阶段 将文本文件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Wang Ao&#39;s blog">
+<meta property="og:title" content="CSAPP">
 <meta property="og:url" content="http://yoursite.com/2018/11/09/csapp/index.html">
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
+<meta property="og:description" content="计算机系统基础信息（位与上下文）像源文件这样由ASCII字符构成的文件称为文本文件，其他所有文件都称为二进制文件。 在不同的上下文中，一个同样的字节序列可能表示不同的信息。信息是由位（字节序列）和上下文决定的。 程序被翻译成不同的格式以C语言为例 最初始 .c文件  预处理阶段 读取 include&amp;lt;stdio.h&amp;gt;的内容，并且把它直接插入到程序文本中。 .i文件 编译阶段 将文本文件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-09T13:06:57.491Z">
+<meta property="og:updated_time" content="2018-11-12T12:45:09.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wang Ao&#39;s blog">
+<meta name="twitter:title" content="CSAPP">
+<meta name="twitter:description" content="计算机系统基础信息（位与上下文）像源文件这样由ASCII字符构成的文件称为文本文件，其他所有文件都称为二进制文件。 在不同的上下文中，一个同样的字节序列可能表示不同的信息。信息是由位（字节序列）和上下文决定的。 程序被翻译成不同的格式以C语言为例 最初始 .c文件  预处理阶段 读取 include&amp;lt;stdio.h&amp;gt;的内容，并且把它直接插入到程序文本中。 .i文件 编译阶段 将文本文件">
 
 
 
@@ -124,7 +127,7 @@
 
 
 
-  <title> | Wang Ao's blog</title>
+  <title>CSAPP | Wang Ao's blog</title>
   
 
 
@@ -270,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">CSAPP</h1>
         
 
         <div class="post-meta">
@@ -282,7 +285,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T21:06:57+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T21:17:43+08:00">
                 2018-11-09
               </time>
             
@@ -320,7 +323,60 @@
       
 
       
-        
+        <h1 id="计算机系统基础"><a href="#计算机系统基础" class="headerlink" title="计算机系统基础"></a>计算机系统基础</h1><h2 id="信息（位与上下文）"><a href="#信息（位与上下文）" class="headerlink" title="信息（位与上下文）"></a>信息（位与上下文）</h2><p>像源文件这样由ASCII字符构成的文件称为文本文件，其他所有文件都称为二进制文件。</p>
+<p>在不同的上下文中，一个同样的字节序列可能表示不同的信息。信息是由位（字节序列）和上下文决定的。</p>
+<h2 id="程序被翻译成不同的格式"><a href="#程序被翻译成不同的格式" class="headerlink" title="程序被翻译成不同的格式"></a>程序被翻译成不同的格式</h2><p>以C语言为例 最初始 .c文件</p>
+<ul>
+<li>预处理阶段 读取 include&lt;stdio.h&gt;的内容，并且把它直接插入到程序文本中。 .i文件</li>
+<li>编译阶段 将文本文件翻译成汇编文件。 .s文件</li>
+<li>汇编阶段 将汇编文件翻译成 二进制文件 .o</li>
+<li>链接阶段 链接二进制文件（如链接printf函数存在的文件） 变成可执行目标文件</li>
+</ul>
+<h2 id="系统的硬件组成"><a href="#系统的硬件组成" class="headerlink" title="系统的硬件组成"></a>系统的硬件组成</h2><ul>
+<li>总线 传送定长的字节块，称为字。32位机4个字节，64位机8个字节。</li>
+<li>IO设备 系统与外部联系的通道</li>
+<li>主存 线性的字节数组，每一个字节都具有唯一地址。</li>
+<li>处理器 处理器是解释存储在主存中指令的引擎，核心是一个字长的存储设备，即程序计数器。</li>
+</ul>
+<h2 id="高速缓存"><a href="#高速缓存" class="headerlink" title="高速缓存"></a>高速缓存</h2><p>高速缓存存放可能经常访问的数据，大部分存储其操作都能在快速的高速缓存中完成。</p>
+<p>寄存器》L1缓存》L2缓存》L3缓存》主存》本地磁盘</p>
+<h2 id="操作系统管理硬件"><a href="#操作系统管理硬件" class="headerlink" title="操作系统管理硬件"></a>操作系统管理硬件</h2><p>所有应用程序对硬件的操作尝试必须通过操作系统。<br>几个基本抽象概念：</p>
+<ul>
+<li>文件 IO设备的抽象表示</li>
+<li>虚拟存储器 对主存和磁盘IO设备的抽象表示</li>
+<li>进程 对处理器，主存，IO设备的抽象表示。 </li>
+</ul>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>进程是操作系统提供的一种假象，好像系统上只有这个程序在运行。进程是操作系统对正在运行的程序的一种抽象。处理器在进程间进行切换，操作系统实现这种机制称为上下文切换。 操作系统保持跟踪进程运行需要的所有信息（上下文），包括程序计数器和寄存器和主存的内容。</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>每个线程都运行在进程的上下文中，共享同样的代码和全局数据。</p>
+<h3 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h3><p>为进程提供了一种假象，即独占的使用主存。每个进程看到是一致的存储器，称为虚拟地址空间。（不同进程相同地址的虚拟地址空间会被映射到不同的物理地址上）</p>
+<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>系统中所有的输入输出都是通过使用一小组UNIX IO 的系统函数调用读写文件来实现的。</p>
+<h1 id="信息的处理和表示"><a href="#信息的处理和表示" class="headerlink" title="信息的处理和表示"></a>信息的处理和表示</h1><h2 id="字节顺序"><a href="#字节顺序" class="headerlink" title="字节顺序"></a>字节顺序</h2><p>最低有效字节在前面的方式，称为小端法。最高有效字节在最前面的方式称为大端法。不同的机器不一样。<br>网络应用程序代码的编写必须遵守已建立的关于字节顺序的规则。</p>
+<h2 id="表示字符串"><a href="#表示字符串" class="headerlink" title="表示字符串"></a>表示字符串</h2><p>在使用ASCII码作为字符串的任何系统上都将得到相同的结果，与字节顺序和字大小无关。（存的就是ASCII码），因此，文本数据比二进制数据具有更强的平台独立性。</p>
+<h2 id="表示代码"><a href="#表示代码" class="headerlink" title="表示代码"></a>表示代码</h2><p>指令编码是不同的。不同机器类型使用不同且不兼容的指令和编码方式。同样机器运行不同的操作系统也会有不同的编码规则。</p>
+<h2 id="布尔代数"><a href="#布尔代数" class="headerlink" title="布尔代数"></a>布尔代数</h2><p>a^a = 0;<br>a^a^b = b;<br>0^b = b;</p>
+<h2 id="c语言中的逻辑运算"><a href="#c语言中的逻辑运算" class="headerlink" title="c语言中的逻辑运算"></a>c语言中的逻辑运算</h2><p>非0的参数都认为是True;0表示false。并且满足短路法则。</p>
+<h2 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h2><p>逻辑移位 左移：丢弃最高的K位，右端补上k个0；  右移：左端补k个0，右端丢弃k位。<br>算术移位 左移：丢弃最高的K位，右端补上k个0；  右移：左端补k个最高位有效值，右端丢弃k位。</p>
+<p>java全是有符号数，全部采用补码，所以是算术移位。如果移位超过字长，会采取求模的方式重新计算移位。</p>
+<h2 id="有符号数和无符号数转换"><a href="#有符号数和无符号数转换" class="headerlink" title="有符号数和无符号数转换"></a>有符号数和无符号数转换</h2><p>无符号数y = x + 2的W次方 x&lt;0;<br>           x            x&gt;=0;</p>
+<p>有符号数y = x           x &lt; 2的w-1次方<br>           x - 2W次方   x &gt;= 2的w-1次方。</p>
+<p>隐式转换 ：<br>-1 &lt; 0U       因为0是无符号的，所以会将-1转化位无符号数42393967295u</p>
+<h2 id="拓展一个数字的位表示"><a href="#拓展一个数字的位表示" class="headerlink" title="拓展一个数字的位表示"></a>拓展一个数字的位表示</h2><ul>
+<li>无符号数 零扩展 在最高为添加0；</li>
+<li><p>有符号数 符号扩展 添加最高位的副本。</p>
+</li>
+<li><p>扩展与转化的顺序 ： short 转化位 unsigned 时，先改变大小，再完成转换。</p>
+</li>
+</ul>
+<h2 id="截断数字"><a href="#截断数字" class="headerlink" title="截断数字"></a>截断数字</h2><p>丢弃被截断的高位</p>
+<h2 id="无符号加法"><a href="#无符号加法" class="headerlink" title="无符号加法"></a>无符号加法</h2><p>计算的和 模 2的w次方，相当于简单丢弃w+1位。</p>
+<h2 id="补码加法"><a href="#补码加法" class="headerlink" title="补码加法"></a>补码加法</h2><p>和无符号加法相同。计算机通过相同的机器指令完成。</p>
+<h2 id="无符号乘法"><a href="#无符号乘法" class="headerlink" title="无符号乘法"></a>无符号乘法</h2><p>计算xy并 模 2的次方，相当于只保留w位。</p>
+<h2 id="补码乘法"><a href="#补码乘法" class="headerlink" title="补码乘法"></a>补码乘法</h2><p>和无符号乘法相同。计算机通过相同的机器指令完成。</p>
+<h2 id="乘以常数"><a href="#乘以常数" class="headerlink" title="乘以常数"></a>乘以常数</h2><p>用移位和加法运算来代替乘常数因子；<br>无符号数和补码都采用一下办法：x&lt;&lt; k 相当于 x 乘2的k次方。</p>
+<p>x 乘 14 = (x&lt;&lt;3) + (x&lt;&lt;2) +(x&lt;&lt;1)             14 = 8 + 4 + 2</p>
+<h2 id="除以2的幂"><a href="#除以2的幂" class="headerlink" title="除以2的幂"></a>除以2的幂</h2><p>对于无符号数 x &gt;&gt; k 等价于 x / 2的k次幂；</p>
+<p>对于补码的非负数 x&gt;&gt;k即可，对于负数不需要舍入的情况，x &gt;&gt; k也可。<br>对于负数 需要舍入 如： -7/2 则需要计算 (x + (1&lt;&lt;k) -1)&gt;&gt;k，原因是负数需要像0舍入而不是向下舍入。</p>
+
       
     </div>
     
@@ -353,6 +409,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/13/剑指Offer/" rel="prev" title="剑指Offer">
+                剑指Offer <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -404,8 +464,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -424,7 +493,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -451,6 +520,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机系统基础"><span class="nav-number">1.</span> <span class="nav-text">计算机系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#信息（位与上下文）"><span class="nav-number">1.1.</span> <span class="nav-text">信息（位与上下文）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序被翻译成不同的格式"><span class="nav-number">1.2.</span> <span class="nav-text">程序被翻译成不同的格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统的硬件组成"><span class="nav-number">1.3.</span> <span class="nav-text">系统的硬件组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高速缓存"><span class="nav-number">1.4.</span> <span class="nav-text">高速缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统管理硬件"><span class="nav-number">1.5.</span> <span class="nav-text">操作系统管理硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程"><span class="nav-number">1.5.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程"><span class="nav-number">1.5.2.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟存储器"><span class="nav-number">1.5.3.</span> <span class="nav-text">虚拟存储器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件"><span class="nav-number">1.5.4.</span> <span class="nav-text">文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信息的处理和表示"><span class="nav-number">2.</span> <span class="nav-text">信息的处理和表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字节顺序"><span class="nav-number">2.1.</span> <span class="nav-text">字节顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表示字符串"><span class="nav-number">2.2.</span> <span class="nav-text">表示字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表示代码"><span class="nav-number">2.3.</span> <span class="nav-text">表示代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔代数"><span class="nav-number">2.4.</span> <span class="nav-text">布尔代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c语言中的逻辑运算"><span class="nav-number">2.5.</span> <span class="nav-text">c语言中的逻辑运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移位运算"><span class="nav-number">2.6.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有符号数和无符号数转换"><span class="nav-number">2.7.</span> <span class="nav-text">有符号数和无符号数转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展一个数字的位表示"><span class="nav-number">2.8.</span> <span class="nav-text">拓展一个数字的位表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#截断数字"><span class="nav-number">2.9.</span> <span class="nav-text">截断数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号加法"><span class="nav-number">2.10.</span> <span class="nav-text">无符号加法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补码加法"><span class="nav-number">2.11.</span> <span class="nav-text">补码加法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号乘法"><span class="nav-number">2.12.</span> <span class="nav-text">无符号乘法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补码乘法"><span class="nav-number">2.13.</span> <span class="nav-text">补码乘法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乘以常数"><span class="nav-number">2.14.</span> <span class="nav-text">乘以常数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#除以2的幂"><span class="nav-number">2.15.</span> <span class="nav-text">除以2的幂</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

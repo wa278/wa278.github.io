@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="二维数组中的查找在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。123456789101112131415161718public class Solution1 &amp;#123;    public boolean Find(int target, int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指Offer">
+<meta property="og:url" content="http://yoursite.com/2018/11/13/剑指Offer/index.html">
+<meta property="og:site_name" content="Wang Ao&#39;s blog">
+<meta property="og:description" content="二维数组中的查找在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。123456789101112131415161718public class Solution1 &amp;#123;    public boolean Find(int target, int">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-13T07:36:31.963Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剑指Offer">
+<meta name="twitter:description" content="二维数组中的查找在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。123456789101112131415161718public class Solution1 &amp;#123;    public boolean Find(int target, int">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/13/剑指Offer/"/>
+
+
+
+
+
+  <title>剑指Offer | Wang Ao's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/wa278" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wang Ao's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/剑指Offer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang Ao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">剑指Offer</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T15:36:43+08:00">
+                2018-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="二维数组中的查找"><a href="#二维数组中的查找" class="headerlink" title="二维数组中的查找"></a>二维数组中的查找</h1><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，<br>每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，<br>判断数组中是否含有该整数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Solution1 &#123;</span><br><span class="line">    public boolean Find(int target, int [][] array) &#123;</span><br><span class="line">        int a = array[0].length -1 ;</span><br><span class="line">        int b = 0;</span><br><span class="line">        while(a &gt;=0 &amp;&amp; b &lt;= array[0].length -1)&#123;</span><br><span class="line">            if(array[b][a] &lt; target )&#123;</span><br><span class="line">                b++;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(array[b][a] &gt; target )&#123;</span><br><span class="line">                a --;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a>从尾到头打印链表</h1><p>输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Solution3 &#123;</span><br><span class="line">    public ArrayList&lt;Integer&gt; printListFromTailToHead(ListNode listNode) &#123;</span><br><span class="line">        Stack&lt;ListNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        while (listNode != null) &#123;</span><br><span class="line">            stack.push(listNode);</span><br><span class="line">            listNode = listNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ArrayList&lt;Integer&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        while (!stack.isEmpty()) &#123;</span><br><span class="line">            result.add(stack.pop().val);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h1><p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。<br>假设输入的前序遍历和中序遍历的结果中都不含重复的数字。<br>例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class Solution4 &#123;</span><br><span class="line">    public TreeNode reConstructBinaryTree(int[] pre, int[] in) &#123;</span><br><span class="line">        return reConstructBinaryTree(pre, in, 0, pre.length - 1, 0, in.length - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public TreeNode reConstructBinaryTree(int[] pre, int[] in, int startPre, int endPre, int startIn, int endIn) &#123;</span><br><span class="line">        TreeNode root = new TreeNode(pre[startPre]);</span><br><span class="line">        int i = findX(in, pre[startPre], startIn, endIn);</span><br><span class="line">        int leftNumber = i - startIn;</span><br><span class="line">        int rightNumber = endIn - i;</span><br><span class="line">        if (leftNumber &gt; 0) &#123;</span><br><span class="line">            root.left = reConstructBinaryTree(pre, in, startPre + 1, startPre + leftNumber, startIn, i - 1);</span><br><span class="line">        &#125;</span><br><span class="line">        if (rightNumber &gt; 0) &#123;</span><br><span class="line">            root.right = reConstructBinaryTree(pre, in, startPre + leftNumber + 1, endPre, i + 1, endIn);</span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int findX(int[] in, int x, int startIn, int endIn) &#123;</span><br><span class="line">        for (int i = startIn; i &lt;= endIn; i++) &#123;</span><br><span class="line">            if (x == in[i]) &#123;</span><br><span class="line">                return i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="用两个栈实现队列"><a href="#用两个栈实现队列" class="headerlink" title="用两个栈实现队列"></a>用两个栈实现队列</h1><p>用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Stack;</span><br><span class="line"></span><br><span class="line">public class Solution5 &#123;</span><br><span class="line">    Stack&lt;Integer&gt; stack1 = new Stack&lt;Integer&gt;();</span><br><span class="line">    Stack&lt;Integer&gt; stack2 = new Stack&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">    public void push(int node) &#123;</span><br><span class="line">        stack1.push(node);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int pop() &#123;</span><br><span class="line">        if(stack2.isEmpty())&#123;</span><br><span class="line">            while (!stack1.isEmpty())&#123;</span><br><span class="line">                stack2.push(stack1.pop());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return stack2.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a>旋转数组的最小数字</h1><p>把一个数组最开始的若干个元素搬到数组的末尾，<br>我们称之为数组的旋转。 输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。<br>例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public class Solution6 &#123;</span><br><span class="line">    public int minNumberInRotateArray(int [] array) &#123;</span><br><span class="line">        if(array.length == 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int lo = 0;</span><br><span class="line">        int hi = array.length -1;</span><br><span class="line">        int mid = 0;</span><br><span class="line">        while (array[lo] &gt;= array[hi])&#123;</span><br><span class="line">            mid = lo + (hi-lo)/2;</span><br><span class="line">            if(hi - lo == 1)&#123;</span><br><span class="line">                mid = hi;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            if(array[hi] == array[mid] &amp;&amp; array[lo] == array[mid])&#123;</span><br><span class="line">                return linearfind(array,lo,hi);</span><br><span class="line">            &#125;</span><br><span class="line">            if(array[mid] &gt;= array[lo])&#123;</span><br><span class="line">                lo = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(array[mid] &lt;= array[hi])&#123;</span><br><span class="line">                hi = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return array[mid];</span><br><span class="line">    &#125;</span><br><span class="line">    public int linearfind(int[] array,int a, int b)&#123;</span><br><span class="line">        int min = array[a];</span><br><span class="line">        for(int i = a; i &lt;=b ; i++)&#123;</span><br><span class="line">            if(array[i] &lt; min)&#123;</span><br><span class="line">                min = array[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return min;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int array[] = &#123;3,4,5,1,2&#125;;</span><br><span class="line">        Solution6 x = new Solution6();</span><br><span class="line">        System.out.println(x.minNumberInRotateArray(array));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h1><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级。<br>求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Solution7 &#123;</span><br><span class="line">    public int JumpFloor(int target) &#123;</span><br><span class="line">        if(target == 1)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(target == 2)&#123;</span><br><span class="line">            return 2;</span><br><span class="line">        &#125;</span><br><span class="line">        return JumpFloor(target-1) + JumpFloor(target - 2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以用非递归算法 更加高效。</p>
+<h1 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h1><p>输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Solution10 &#123;</span><br><span class="line">    public int NumberOf1(int n) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        while (n !=0)&#123;</span><br><span class="line">            if((n &amp; 1 )== 1)&#123;</span><br><span class="line">                result ++;</span><br><span class="line">            &#125;</span><br><span class="line">            n = n &gt;&gt;&gt; 1; //无符号移动 &gt;&gt;&gt;  &lt;&lt; 是有符号移动 负数最高位右移会补1 负数左移最高位不动，第二位移动。</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="数值的整数次方"><a href="#数值的整数次方" class="headerlink" title="数值的整数次方"></a>数值的整数次方</h1><p>给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Solution11 &#123;</span><br><span class="line">    public double Power(double base, int exponent) &#123;</span><br><span class="line">        if(exponent &lt; 0)&#123;</span><br><span class="line">            return  1 / multi(base,-exponent);</span><br><span class="line">        &#125;</span><br><span class="line">        else if (exponent ==0)&#123;</span><br><span class="line">            return  1;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            return multi(base,exponent);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public double multi(double base,int exponent)&#123;</span><br><span class="line">        if(exponent == 0)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(exponent == 1)&#123;</span><br><span class="line">            return  base;</span><br><span class="line">        &#125;</span><br><span class="line">        if((exponent &amp; 1) == 0)&#123;</span><br><span class="line">            double result = multi(base,exponent &gt;&gt;1) ;</span><br><span class="line">            return result*result;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            double result = multi(base,exponent&gt;&gt;1);</span><br><span class="line">            return result*result*base;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="调整顺序使奇数位于偶数前面"><a href="#调整顺序使奇数位于偶数前面" class="headerlink" title="调整顺序使奇数位于偶数前面"></a>调整顺序使奇数位于偶数前面</h1><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，<br>所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class Solution12 &#123;</span><br><span class="line">    public void reOrderArray(int [] array) &#123;</span><br><span class="line">        int[] temp = new int[array.length];</span><br><span class="line">        int k = 0;</span><br><span class="line">        for(int i = 0; i&lt;array.length;i++)&#123;</span><br><span class="line">            if((array[i] &amp; 1) == 1)&#123;</span><br><span class="line">                temp[k++] = array[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 0; i&lt;array.length;i++)&#123;</span><br><span class="line">            if((array[i] &amp; 1) == 0)&#123;</span><br><span class="line">                temp[k++] = array[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 0; i &lt; array.length; i++)&#123;</span><br><span class="line">            array[i] = temp[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="链表中倒数第k个节点"><a href="#链表中倒数第k个节点" class="headerlink" title="链表中倒数第k个节点"></a>链表中倒数第k个节点</h1><p>输入一个链表，输出该链表中倒数第k个结点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Solution13 &#123;</span><br><span class="line">    public ListNode FindKthToTail(ListNode head,int k) &#123;</span><br><span class="line">        if(head ==null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if( k == 0)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode index = head;</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i&lt; k-1;i++)&#123;</span><br><span class="line">            index = index.next;</span><br><span class="line">            if(index == null)&#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while (index.next != null)&#123;</span><br><span class="line">            index = index.next;</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h1><p>输入一个链表，反转链表后，输出新链表的表头。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Solution14 &#123;</span><br><span class="line">    public ListNode ReverseList(ListNode head) &#123;</span><br><span class="line">        if(head == null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode pre = null;</span><br><span class="line">        ListNode result = head;</span><br><span class="line">        ListNode next;</span><br><span class="line">        while (result.next != null)&#123;</span><br><span class="line">            next = result.next;</span><br><span class="line">            result.next = pre;</span><br><span class="line">            pre = result;</span><br><span class="line">            result = next;</span><br><span class="line">        &#125;</span><br><span class="line">        result.next = pre;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="合并两个排序链表"><a href="#合并两个排序链表" class="headerlink" title="合并两个排序链表"></a>合并两个排序链表</h1><p>输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public ListNode Merge(ListNode list1,ListNode list2) &#123;</span><br><span class="line">        if(list1 == null)&#123;</span><br><span class="line">            return list2;</span><br><span class="line">        &#125;</span><br><span class="line">        if(list2 == null)&#123;</span><br><span class="line">            return list1;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode result =new ListNode(0);</span><br><span class="line">        ListNode index = result;</span><br><span class="line">        while (list1 != null || list2 !=null)&#123;</span><br><span class="line">            if(list1 == null)&#123;</span><br><span class="line">                index.next = list2;</span><br><span class="line">                list2 = list2.next;</span><br><span class="line">                index = index.next;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(list2 == null)&#123;</span><br><span class="line">                index.next = list1;</span><br><span class="line">                list1 = list1.next;</span><br><span class="line">                index = index.next;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(list1.val &lt; list2.val)&#123;</span><br><span class="line">                index.next = list1;</span><br><span class="line">                list1 = list1.next;</span><br><span class="line">                index = index.next;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                index.next = list2;</span><br><span class="line">                list2 = list2.next;</span><br><span class="line">                index = index.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">递归版本</span><br><span class="line">public ListNode Merge(ListNode list1,ListNode list2) &#123;</span><br><span class="line">       if(list1 == null)&#123;</span><br><span class="line">           return list2;</span><br><span class="line">       &#125;</span><br><span class="line">       if(list2 == null)&#123;</span><br><span class="line">           return list1;</span><br><span class="line">       &#125;</span><br><span class="line">       if(list1.val &lt;= list2.val)&#123;</span><br><span class="line">           list1.next = Merge(list1.next, list2);</span><br><span class="line">           return list1;</span><br><span class="line">       &#125;else&#123;</span><br><span class="line">           list2.next = Merge(list1, list2.next);</span><br><span class="line">           return list2;</span><br><span class="line">       &#125;       </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="树的子结构"><a href="#树的子结构" class="headerlink" title="树的子结构"></a>树的子结构</h1><p>输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Solution16 &#123;</span><br><span class="line">    public boolean HasSubtree(TreeNode root1,TreeNode root2)&#123;</span><br><span class="line">        boolean result =false;</span><br><span class="line">        if(root1 !=null &amp;&amp; root2 !=null)&#123;</span><br><span class="line">            if(root1.val == root2.val)&#123;</span><br><span class="line">                result = doesTree1HaveTree2(root1,root2);</span><br><span class="line">            &#125;</span><br><span class="line">            if(!result)&#123;</span><br><span class="line">                result = HasSubtree(root1.left,root2);</span><br><span class="line">            &#125;</span><br><span class="line">            if(!result)&#123;</span><br><span class="line">                result = HasSubtree(root1.right,root2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean doesTree1HaveTree2(TreeNode root1,TreeNode root2)&#123;</span><br><span class="line">        if(root2== null)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root1 == null)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root1.val != root2.val)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return doesTree1HaveTree2(root1.left,root2.left) &amp;&amp; doesTree1HaveTree2(root1.right,root2.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉树的镜像"><a href="#二叉树的镜像" class="headerlink" title="二叉树的镜像"></a>二叉树的镜像</h1><p>操作给定的二叉树，将其变换为源二叉树的镜像。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Solution17 &#123;</span><br><span class="line">    public void Mirror(TreeNode root) &#123;</span><br><span class="line">        if(root != null)&#123;</span><br><span class="line">            TreeNode temp = root.left;</span><br><span class="line">            root.left = root.right;</span><br><span class="line">            root.right = temp;</span><br><span class="line">            Mirror(root.right);</span><br><span class="line">            Mirror(root.left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="顺时针打印矩阵"><a href="#顺时针打印矩阵" class="headerlink" title="顺时针打印矩阵"></a>顺时针打印矩阵</h1><p>输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，<br>例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16<br>则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">public class Solution18 &#123;</span><br><span class="line">    public ArrayList&lt;Integer&gt; printMatrix(int [][] matrix) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();</span><br><span class="line">        int n = Math.min(matrix.length,matrix[0].length);</span><br><span class="line">        int m = (n+1) /2;</span><br><span class="line">        for(int i =0; i&lt; m;i++)&#123;</span><br><span class="line">            for(int j = i; j &lt; matrix[0].length -i;j++)&#123;</span><br><span class="line">                arrayList.add(matrix[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            for(int j = i+1; j &lt; matrix.length-i;j++)&#123;</span><br><span class="line">                arrayList.add(matrix[j][matrix[0].length-1-i]);</span><br><span class="line">            &#125;</span><br><span class="line">            for (int j= matrix[0].length-2-i; j&gt;=0+i &amp;&amp; matrix.length-1-i &gt;i;j--)&#123;</span><br><span class="line">                arrayList.add(matrix[matrix.length-1-i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            for (int j = matrix.length-2-i; j &gt;= 1+i &amp;&amp; i&lt;matrix[0].length-1-i;j--)&#123;</span><br><span class="line">                arrayList.add(matrix[j][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return arrayList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="包含Min函数的栈"><a href="#包含Min函数的栈" class="headerlink" title="包含Min函数的栈"></a>包含Min函数的栈</h1><p>定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Stack;</span><br><span class="line"></span><br><span class="line">public class Solution19 &#123;</span><br><span class="line">    Stack&lt;Integer&gt; stack1 = new Stack&lt;&gt;();</span><br><span class="line">    Stack&lt;Integer&gt; stack2 = new Stack&lt;&gt;();</span><br><span class="line">    public void push(int node) &#123;</span><br><span class="line">        if(stack1.isEmpty() || stack2.peek() &gt;= node)&#123;</span><br><span class="line">            stack1.push(node);</span><br><span class="line">            stack2.push(node);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            stack1.push(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void pop() &#123;</span><br><span class="line">        if(stack1.peek() == stack2.peek())&#123;</span><br><span class="line">            stack1.pop();</span><br><span class="line">            stack2.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            stack1.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int top() &#123;</span><br><span class="line">        return stack1.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int min() &#123;</span><br><span class="line">        return stack2.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="栈的压入弹出序列"><a href="#栈的压入弹出序列" class="headerlink" title="栈的压入弹出序列"></a>栈的压入弹出序列</h1><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。<br>假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，<br>序列4,5,3,2,1是该压栈序列对应的一个弹出序列，<br>但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Stack;</span><br><span class="line"></span><br><span class="line">public class Solution20 &#123;</span><br><span class="line">    public boolean IsPopOrder(int [] pushA,int [] popA) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        int a = 0;</span><br><span class="line">        int b = 0;</span><br><span class="line">        for(;a&lt;pushA.length;a++)&#123;</span><br><span class="line">            stack.push(pushA[a]);</span><br><span class="line">            while (!stack.isEmpty() &amp;&amp; stack.peek() == popA[b])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">                b++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return stack.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉搜索树的后序遍历序列"><a href="#二叉搜索树的后序遍历序列" class="headerlink" title="二叉搜索树的后序遍历序列"></a>二叉搜索树的后序遍历序列</h1><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。<br>如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Solution22 &#123;</span><br><span class="line">    public boolean VerifySquenceOfBST(int [] sequence) &#123;</span><br><span class="line">        if(sequence ==null || sequence.length == 0)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return VerifySquenceOfBST(sequence,0,sequence.length-1);</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean VerifySquenceOfBST(int [] sequence,int a, int b)&#123;</span><br><span class="line">        if(a &gt;= b)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        int root = sequence[b];</span><br><span class="line">        int k = a;</span><br><span class="line">        while (sequence[k] &lt; root)&#123;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">        int split = k;</span><br><span class="line">        while (k &lt; b-1)&#123;</span><br><span class="line">            if(sequence[k] &lt; root)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">        return VerifySquenceOfBST(sequence,a,split-1) &amp;&amp; VerifySquenceOfBST(sequence,split,b-1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉树中和为某一值的路径"><a href="#二叉树中和为某一值的路径" class="headerlink" title="二叉树中和为某一值的路径"></a>二叉树中和为某一值的路径</h1><p>输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。<br>路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class Solution23 &#123;</span><br><span class="line">    ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; linkedList = new LinkedList&lt;&gt;();</span><br><span class="line">    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindPath(TreeNode root, int target) &#123;</span><br><span class="line">        if(root == null &amp;&amp; target == 0)&#123;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">        find(root,target);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    public void find(TreeNode root,int target)&#123;</span><br><span class="line">        linkedList.addLast(root.val);</span><br><span class="line">        if(root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == target)&#123;</span><br><span class="line">            ArrayList&lt;Integer&gt; x = new ArrayList&lt;&gt;(linkedList);</span><br><span class="line">            result.add(x);</span><br><span class="line">        &#125;</span><br><span class="line">        if(root.left != null)&#123;</span><br><span class="line">            find(root.left,target - root.val);</span><br><span class="line">        &#125;</span><br><span class="line">        if(root.right != null)&#123;</span><br><span class="line">            find(root.right,target- root.val);</span><br><span class="line">        &#125;</span><br><span class="line">        linkedList.removeLast();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="复杂链表的复制"><a href="#复杂链表的复制" class="headerlink" title="复杂链表的复制"></a>复杂链表的复制</h1><p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，<br>另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。<br>（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public class Solution24 &#123;</span><br><span class="line">    public RandomListNode Clone(RandomListNode pHead)</span><br><span class="line">    &#123;</span><br><span class="line">        RandomListNode head = pHead;</span><br><span class="line"></span><br><span class="line">        while (head!=null)&#123;</span><br><span class="line">            RandomListNode temp = head.next;</span><br><span class="line">            RandomListNode dup = new RandomListNode(head.label);</span><br><span class="line">            head.next = dup;</span><br><span class="line">            dup.next = temp;</span><br><span class="line">            head = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        head = pHead;</span><br><span class="line">        while (head != null)&#123;</span><br><span class="line">            RandomListNode dup = head.next;</span><br><span class="line">            if(head.random != null)&#123;</span><br><span class="line">                dup.random = head.random.next;</span><br><span class="line">            &#125;</span><br><span class="line">            head = dup.next;</span><br><span class="line">        &#125;</span><br><span class="line">        RandomListNode result = new RandomListNode(0);</span><br><span class="line">        RandomListNode temp = result;</span><br><span class="line">        head = pHead;</span><br><span class="line">        while (head != null)&#123;</span><br><span class="line">            RandomListNode dup = head.next;</span><br><span class="line">            temp.next = dup;</span><br><span class="line">            head.next = dup.next;</span><br><span class="line">            head = head.next;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return result.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class RandomListNode &#123;</span><br><span class="line">    int label;</span><br><span class="line">    RandomListNode next = null;</span><br><span class="line">    RandomListNode random = null;</span><br><span class="line"></span><br><span class="line">    RandomListNode(int label) &#123;</span><br><span class="line">        this.label = label;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉搜索树与双向链表"><a href="#二叉搜索树与双向链表" class="headerlink" title="二叉搜索树与双向链表"></a>二叉搜索树与双向链表</h1><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。<br>要求不能创建任何新的结点，只能调整树中结点指针的指向。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class Solution25 &#123;</span><br><span class="line">    TreeNode pre = null;</span><br><span class="line">    public TreeNode Convert(TreeNode pRootOfTree) &#123;</span><br><span class="line">        if (pRootOfTree == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        inOrder(pRootOfTree);</span><br><span class="line">        while (pre.left !=null)&#123;</span><br><span class="line">            pre = pre.left;</span><br><span class="line">        &#125;</span><br><span class="line">        return pre;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void inOrder(TreeNode pRootOfTree) &#123;</span><br><span class="line">        if (pRootOfTree.left != null) &#123;</span><br><span class="line">            inOrder(pRootOfTree.left);</span><br><span class="line">        &#125;</span><br><span class="line">        pRootOfTree.left = pre;</span><br><span class="line">        if(pre != null)&#123;</span><br><span class="line">            pre.right = pRootOfTree;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = pRootOfTree;</span><br><span class="line">        if (pRootOfTree.right != null) &#123;</span><br><span class="line">            inOrder(pRootOfTree.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="字符串的排列"><a href="#字符串的排列" class="headerlink" title="字符串的排列"></a>字符串的排列</h1><p>输入一个字符串,按字典序打印出该字符串中字符的所有排列。<br>例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Solution26 &#123;</span><br><span class="line">    public ArrayList&lt;String&gt; Permutation(String str) &#123;</span><br><span class="line">        if(str == null || str.length() ==0)&#123;</span><br><span class="line">            return new ArrayList&lt;String&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        char[] string = str.toCharArray();</span><br><span class="line">        ArrayList&lt;String&gt; result= new ArrayList&lt;&gt;();</span><br><span class="line">        HashSet&lt;String&gt; res = new HashSet&lt;&gt;();</span><br><span class="line">        permutation(string,0,res);</span><br><span class="line">        for (String e: res) &#123;</span><br><span class="line">            result.add(e);</span><br><span class="line">        &#125;</span><br><span class="line">        Collections.sort(result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    public void permutation(char[] str,int i,HashSet&lt;String&gt; res)&#123;</span><br><span class="line">        for (int j = i; j &lt; str.length;j++)&#123;</span><br><span class="line">            exch(str,i,j);</span><br><span class="line">            res.add(new String(str));</span><br><span class="line">            permutation(str,i+1,res);</span><br><span class="line">            exch(str,i,j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public void exch(char[] str,int a ,int b)&#123;</span><br><span class="line">        char temp = str[a];</span><br><span class="line">        str[a] = str[b];</span><br><span class="line">        str[b] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="数组中出现次数超过一半的数字"><a href="#数组中出现次数超过一半的数字" class="headerlink" title="数组中出现次数超过一半的数字"></a>数组中出现次数超过一半的数字</h1><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。<br>例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，<br>超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">public class Solution27 &#123;</span><br><span class="line">    public int MoreThanHalfNum_Solution(int [] array) &#123;</span><br><span class="line">        int mid = array.length/2;</span><br><span class="line">        int a = 0;</span><br><span class="line">        int b = array.length-1;</span><br><span class="line">        while (a&lt;b)&#123;</span><br><span class="line">            int k = partition(array,a,b);</span><br><span class="line">            if(k &lt; mid)&#123;</span><br><span class="line">                a = k+1;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(k &gt; mid)&#123;</span><br><span class="line">                b = k-1;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int num = array[mid];</span><br><span class="line">        int amount = 0;</span><br><span class="line">        for (int e:array) &#123;</span><br><span class="line">            if(e == num)&#123;</span><br><span class="line">                amount++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return amount &gt;= array.length/2 +1? num:0;</span><br><span class="line">    &#125;</span><br><span class="line">    public int partition(int[] array, int a,int b)&#123;</span><br><span class="line">        int v = array[a];</span><br><span class="line">        int lo = a;</span><br><span class="line">        int hi = b+1;</span><br><span class="line">        while (true)&#123;</span><br><span class="line">            while (array[++lo] &lt; v) &#123;</span><br><span class="line">                if(lo == b)&#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            while (array[--hi] &gt; v)&#123;</span><br><span class="line">                if(hi == a)&#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(hi &lt;= lo)&#123;</span><br><span class="line">                exch(array,a,hi);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(array,lo,hi);</span><br><span class="line">        &#125;</span><br><span class="line">        return hi;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public void exch(int[] str,int a ,int b)&#123;</span><br><span class="line">        int temp = str[a];</span><br><span class="line">        str[a] = str[b];</span><br><span class="line">        str[b] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="最小的k个数"><a href="#最小的k个数" class="headerlink" title="最小的k个数"></a>最小的k个数</h1><p>输入n个整数，找出其中最小的K个数。<br>例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class Solution28 &#123;</span><br><span class="line">    public ArrayList&lt;Integer&gt; GetLeastNumbers_Solution(int [] input, int k) &#123;</span><br><span class="line">        if(k &gt; input.length)&#123;</span><br><span class="line">            return new ArrayList&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        Queue&lt;Integer&gt; heap = new PriorityQueue&lt;&gt;(new Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public int compare(Integer o1, Integer o2) &#123;</span><br><span class="line">                if(o1 &lt; o2)&#123;</span><br><span class="line">                    return 1;</span><br><span class="line">                &#125;</span><br><span class="line">                else if(o1 &gt; o2)&#123;</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125;</span><br><span class="line">                else &#123;</span><br><span class="line">                    return 0;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        ArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();</span><br><span class="line">        int i = 0;</span><br><span class="line">        for(; i &lt; k ; i++)&#123;</span><br><span class="line">            heap.offer(input[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        while (i &lt; input.length)&#123;</span><br><span class="line">            heap.offer(input[i]);</span><br><span class="line">            i++;</span><br><span class="line">            heap.poll();</span><br><span class="line">        &#125;</span><br><span class="line">        while (!heap.isEmpty())&#123;</span><br><span class="line">            arrayList.add(heap.poll());</span><br><span class="line">        &#125;</span><br><span class="line">        return arrayList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="连续子数组的最大和"><a href="#连续子数组的最大和" class="headerlink" title="连续子数组的最大和"></a>连续子数组的最大和</h1><p>例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。<br>给一个数组，返回它的最大连续子序列的和，子向量的长度至少是1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Solution29 &#123;</span><br><span class="line">    public int FindGreatestSumOfSubArray(int[] array) &#123;</span><br><span class="line">        int max = array[0];</span><br><span class="line">        int sum = array[0];</span><br><span class="line">        for(int i = 1; i &lt; array.length; i++)&#123;</span><br><span class="line">            sum = Math.max(sum+array[i],array[i]);</span><br><span class="line">            max = Math.max(max,sum);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="从1到n整数中1出现的次数"><a href="#从1到n整数中1出现的次数" class="headerlink" title="从1到n整数中1出现的次数"></a>从1到n整数中1出现的次数</h1><p>整数中1出现的次数（从1到n整数中1出现的次数）<br>编程之美题目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Solution30 &#123;</span><br><span class="line">    public int NumberOf1Between1AndN_Solution(int n) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        String number = n + &quot;&quot;;</span><br><span class="line">        int length = number.length();</span><br><span class="line">        int x = 1;</span><br><span class="line">        for(int i = 1; i &lt;= length; i++ )&#123;</span><br><span class="line">            int a = n / (x*10);</span><br><span class="line">            int b = n % (x);</span><br><span class="line">            int c = number.charAt(length-i) - &apos;0&apos;;</span><br><span class="line">            if(c == 0)&#123;</span><br><span class="line">                result += (a)*(x);</span><br><span class="line">            &#125;</span><br><span class="line">            else if( c == 1)&#123;</span><br><span class="line">                result += (a) *(x) + b+1;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                result += (a+1) *(x);</span><br><span class="line">            &#125;</span><br><span class="line">            x = x*10;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="把数组排成最小的数"><a href="#把数组排成最小的数" class="headerlink" title="把数组排成最小的数"></a>把数组排成最小的数</h1><p>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，<br>打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，<br>则打印出这三个数字能排成的最小数字为321323。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Solution31 &#123;</span><br><span class="line">    public String PrintMinNumber(int [] numbers) &#123;</span><br><span class="line">        Integer[] num = new Integer[numbers.length];</span><br><span class="line">        for(int i = 0; i &lt; numbers.length;i++)&#123;</span><br><span class="line">            num[i] = new Integer(numbers[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(num,new Comparator&lt;Integer&gt;()&#123;</span><br><span class="line">            @Override</span><br><span class="line">            public int compare(Integer o1, Integer o2) &#123;</span><br><span class="line">                String s1 = o1.intValue()+&quot;&quot; +o2.intValue();</span><br><span class="line">                String s2 = o2.intValue() +&quot;&quot;+o1.intValue();</span><br><span class="line">                return s1.compareTo(s2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        String result = &quot;&quot;;</span><br><span class="line">        for(int i = 0; i &lt; numbers.length;i++)&#123;</span><br><span class="line">            result += num[i].intValue();</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="丑数"><a href="#丑数" class="headerlink" title="丑数"></a>丑数</h1><p>把只包含质因子2、3和5的数称作丑数（Ugly Number）。<br>例如6、8都是丑数，但14不是，因为它包含质因子7。<br>习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class Solution32 &#123;</span><br><span class="line">    public int GetUglyNumber_Solution(int index) &#123;</span><br><span class="line">        if(index == 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int t2 = 0;</span><br><span class="line">        int t3 = 0;</span><br><span class="line">        int t5 = 0;</span><br><span class="line">        int[] unglyNumber = new int[index];</span><br><span class="line">        unglyNumber[0] = 1;</span><br><span class="line">        for(int i = 1; i &lt; index;i++)&#123;</span><br><span class="line">            while (unglyNumber[t2] * 2 &lt;= unglyNumber[i-1])&#123;</span><br><span class="line">                t2++;</span><br><span class="line">            &#125;</span><br><span class="line">            while (unglyNumber[t3] * 3 &lt;= unglyNumber[i-1])&#123;</span><br><span class="line">                t3++;</span><br><span class="line">            &#125;</span><br><span class="line">            while (unglyNumber[t5] * 5 &lt;= unglyNumber[i-1])&#123;</span><br><span class="line">                t5++;</span><br><span class="line">            &#125;</span><br><span class="line">            int a = unglyNumber[t2] * 2;</span><br><span class="line">            int b = unglyNumber[t3] * 3;</span><br><span class="line">            int c = unglyNumber[t5] * 5;</span><br><span class="line">            int min = Math.min(Math.min(a,b),c);</span><br><span class="line">            if(min == a)&#123;</span><br><span class="line">                unglyNumber[i] = a;</span><br><span class="line">                t2 ++;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(min == b)&#123;</span><br><span class="line">                unglyNumber[i] = b;</span><br><span class="line">                t3 ++;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                unglyNumber[i] = c;</span><br><span class="line">                t5 ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return unglyNumber[index-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="数组中的逆序对"><a href="#数组中的逆序对" class="headerlink" title="数组中的逆序对"></a>数组中的逆序对</h1><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。<br>输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。<br>即输出P%1000000007</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class Solution34 &#123;</span><br><span class="line">    long num = 0;</span><br><span class="line">    int[] copy;</span><br><span class="line">    public int InversePairs(int [] array) &#123;</span><br><span class="line">        copy = new int[array.length];</span><br><span class="line">        mergeSort(array,0,array.length-1);</span><br><span class="line">        return(int) (num % 1000000007);</span><br><span class="line">    &#125;</span><br><span class="line">    public void mergeSort(int[] array,int lo, int hi)&#123;</span><br><span class="line">        if(hi &lt;= lo)</span><br><span class="line">            return;</span><br><span class="line">        int mid = lo + (hi - lo) /2;</span><br><span class="line">        mergeSort(array,lo,mid);</span><br><span class="line">        mergeSort(array,mid+1,hi);</span><br><span class="line">        merge(array,lo,mid,hi);</span><br><span class="line">    &#125;</span><br><span class="line">    public void merge(int[] array,int lo, int mid,int hi)&#123;</span><br><span class="line">        for(int i = lo; i &lt;= hi; i++)&#123;</span><br><span class="line">            copy[i] = array[i];</span><br><span class="line">        &#125;</span><br><span class="line">        int i = mid;</span><br><span class="line">        int j = hi;</span><br><span class="line">        for(int k = hi; k &gt;= lo; k--)&#123;</span><br><span class="line">            if(i &lt; lo)&#123;</span><br><span class="line">                array[k] = copy[j--];</span><br><span class="line">            &#125;</span><br><span class="line">            else if(j &lt;= mid)&#123;</span><br><span class="line">                array[k] = copy[i--];</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            else if(copy[i] &gt; copy[j])&#123;</span><br><span class="line">                array[k] = copy[i--];</span><br><span class="line">                num+=j-mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                array[k] = copy[j--];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="两个链表的第一个公共节点"><a href="#两个链表的第一个公共节点" class="headerlink" title="两个链表的第一个公共节点"></a>两个链表的第一个公共节点</h1><p>输入两个链表，找出它们的第一个公共结点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class Solution35 &#123;</span><br><span class="line">    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) &#123;</span><br><span class="line">        int len1 = 0;</span><br><span class="line">        int len2 = 0;</span><br><span class="line">        ListNode index1 = pHead1;</span><br><span class="line">        ListNode index2 = pHead2;</span><br><span class="line">        while (index1 != null)&#123;</span><br><span class="line">            index1 = index1.next;</span><br><span class="line">            len1++;</span><br><span class="line">        &#125;</span><br><span class="line">        while (index2 != null)&#123;</span><br><span class="line">            index2 = index2.next;</span><br><span class="line">            len2++;</span><br><span class="line">        &#125;</span><br><span class="line">        if(len1 &gt; len2)&#123;</span><br><span class="line">            for(int i =0 ; i &lt; len1 - len2; i++)&#123;</span><br><span class="line">                pHead1 = pHead1.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            for(int i =0 ; i &lt; len2 - len1; i++)&#123;</span><br><span class="line">                pHead2 = pHead2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while (pHead1 != pHead2)&#123;</span><br><span class="line">            pHead1 = pHead1.next;</span><br><span class="line">            pHead2 = pHead2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return pHead1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="数字在排序数组中出现的次数"><a href="#数字在排序数组中出现的次数" class="headerlink" title="数字在排序数组中出现的次数"></a>数字在排序数组中出现的次数</h1><p>统计一个数字在排序数组中出现的次数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">public class Solution36 &#123;</span><br><span class="line">    public int GetNumberOfK(int [] array , int k) &#123;</span><br><span class="line">        int left = leftBinarySearch(array,k,0,array.length-1);</span><br><span class="line">        if(left == -1)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int right = rightBinarySearch(array,k,0,array.length-1);</span><br><span class="line">        return right-left+1;</span><br><span class="line">    &#125;</span><br><span class="line">    public int leftBinarySearch(int[] array ,int k, int lo, int hi )&#123;</span><br><span class="line">        if(hi &lt; lo)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int mid = lo +(hi-lo)/2;</span><br><span class="line">        if(array[mid] &lt; k)&#123;</span><br><span class="line">            return leftBinarySearch(array,k,mid+1,hi);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(array[mid] &gt; k)&#123;</span><br><span class="line">            return leftBinarySearch(array,k,lo,mid-1);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            if(mid == 0)&#123;</span><br><span class="line">                return mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(array[mid -1] == array[mid])&#123;</span><br><span class="line">                return leftBinarySearch(array,k,lo,mid-1);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                return mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public int rightBinarySearch(int[] array ,int k, int lo, int hi )&#123;</span><br><span class="line">        if(hi &lt; lo)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int mid = lo +(hi-lo)/2;</span><br><span class="line">        if(array[mid] &lt; k)&#123;</span><br><span class="line">            return rightBinarySearch(array,k,mid+1,hi);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(array[mid] &gt; k)&#123;</span><br><span class="line">            return rightBinarySearch(array,k,lo,mid-1);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            if(mid == array.length-1)&#123;</span><br><span class="line">                return mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(array[mid +1] == array[mid])&#123;</span><br><span class="line">                return rightBinarySearch(array,k,mid+1,hi);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                return mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h1><p>输入一棵二叉树，求该树的深度。<br>从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Solution37 &#123;</span><br><span class="line">    int max = 0;</span><br><span class="line">    int depth = 0;</span><br><span class="line">    public int TreeDepth(TreeNode root)&#123;</span><br><span class="line">        if(root == null)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            return 1+Math.max(TreeDepth(root.left),TreeDepth(root.right));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="输入一棵二叉树，判断该二叉树是否是平衡二叉树。"><a href="#输入一棵二叉树，判断该二叉树是否是平衡二叉树。" class="headerlink" title="输入一棵二叉树，判断该二叉树是否是平衡二叉树。"></a>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Solution38 &#123;</span><br><span class="line">    public boolean IsBalanced_Solution(TreeNode root) &#123;</span><br><span class="line">        return depthOfTree(root) != -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int depthOfTree(TreeNode root) &#123;</span><br><span class="line">        if(root == null)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int left = depthOfTree(root.left);</span><br><span class="line">        if(left == -1)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int right = depthOfTree(root.right);</span><br><span class="line">        if(right == -1)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return (Math.abs(left-right)&lt;=1)? 1+Math.max(left,right):-1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="数组中只出现一次的数字"><a href="#数组中只出现一次的数字" class="headerlink" title="数组中只出现一次的数字"></a>数组中只出现一次的数字</h1><p>一个整型数组里除了两个数字之外，其他的数字都出现了偶数次。<br>请写程序找出这两个只出现一次的数字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class Solution39 &#123;</span><br><span class="line">    public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) &#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for(int i = 0; i &lt; array.length ; i++)&#123;</span><br><span class="line">            sum = sum^array[i];</span><br><span class="line">        &#125;</span><br><span class="line">        int bit = 1;</span><br><span class="line">        while ((sum&amp;1) != 1)&#123;</span><br><span class="line">            bit++;</span><br><span class="line">            sum= sum&gt;&gt;1;</span><br><span class="line">        &#125;</span><br><span class="line">        int flag = 1 &lt;&lt; (bit-1);</span><br><span class="line">        int a = 0;</span><br><span class="line">        int b = 0;</span><br><span class="line">        for(int i = 0; i &lt; array.length; i++)&#123;</span><br><span class="line">            if((array[i] &amp; flag) !=0)&#123;</span><br><span class="line">                a = a ^ array[i];</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                b = b ^ array[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        num1[0]= a;</span><br><span class="line">        num2[0]= b;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="和为S的正数序列"><a href="#和为S的正数序列" class="headerlink" title="和为S的正数序列"></a>和为S的正数序列</h1><p>输出所有和为S的连续正数序列。序列内按照从小至大的顺序，序列间按照开始数字从小到大的顺序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Solution40 &#123;</span><br><span class="line">    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindContinuousSequence(int sum) &#123;</span><br><span class="line">        int a = 1;</span><br><span class="line">        int b = 1;</span><br><span class="line">        int num = 1;</span><br><span class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result =new ArrayList&lt;&gt;();</span><br><span class="line">        while (a &lt; sum/2)&#123;</span><br><span class="line">            if(num &lt; sum)&#123;</span><br><span class="line">                b++;</span><br><span class="line">                num = num+b;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(num &gt; sum)&#123;</span><br><span class="line">                num = num -a;</span><br><span class="line">                a++;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">                for(int i = a; i &lt;= b; i++)&#123;</span><br><span class="line">                    list.add(i);</span><br><span class="line">                &#125;</span><br><span class="line">                result.add(list);</span><br><span class="line">                b++;</span><br><span class="line">                num = num+b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Solution40 x = new Solution40();</span><br><span class="line">        System.out.println(x.FindContinuousSequence(100));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="扑克牌的顺子"><a href="#扑克牌的顺子" class="headerlink" title="扑克牌的顺子"></a>扑克牌的顺子</h1><p>从扑克牌里随机抽5张牌，判断是不是一个顺子，即这五张牌是不是连续的，2~10为数字本身，大小王为0<br>可以看成任何数字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class Solution44 &#123;</span><br><span class="line">    public boolean isContinuous(int [] numbers) &#123;</span><br><span class="line">        if(numbers.length == 0)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(numbers);</span><br><span class="line">        int sum =0;</span><br><span class="line">        int num0 = 0;</span><br><span class="line">        for(int i = 0; i &lt; numbers.length;i++)&#123;</span><br><span class="line">            if(numbers[i] == 0)&#123;</span><br><span class="line">                num0++;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i =numbers.length-1; i &gt;=1 &amp;&amp; numbers[i-1] !=0; i--)&#123;</span><br><span class="line">            int a = numbers[i] - numbers[i-1] - 1;</span><br><span class="line">            if(a &lt;0)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            if(sum + a &gt;num0 )&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                sum = sum+a;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] numbers = &#123;1,3,0,0,5&#125;;</span><br><span class="line">        Solution44 x = new Solution44();</span><br><span class="line">        System.out.println(x.isContinuous(numbers));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="圆圈中最后剩下的数字"><a href="#圆圈中最后剩下的数字" class="headerlink" title="圆圈中最后剩下的数字"></a>圆圈中最后剩下的数字</h1><p>圆圈中最后剩下的数字。n个数字排成一个圆圈，从0开始删除第m个数字。求出最后一个数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class Solution45 &#123;</span><br><span class="line">    public int LastRemaining_Solution(int n, int m) &#123;</span><br><span class="line">        ListNode head = new ListNode(0);</span><br><span class="line">        ListNode index = head;</span><br><span class="line">        for(int i = 1; i &lt;n;i++)&#123;</span><br><span class="line">            index.next = new ListNode(i);</span><br><span class="line">            index = index.next;</span><br><span class="line">        &#125;</span><br><span class="line">        index.next = head;</span><br><span class="line">        while (head.next!=head)&#123;</span><br><span class="line">            for(int i = 0; i &lt; m-1; i++)&#123;</span><br><span class="line">                head = head.next;</span><br><span class="line">            &#125;</span><br><span class="line">            deleteNode(head);</span><br><span class="line">        &#125;</span><br><span class="line">        return head.val;</span><br><span class="line">    &#125;</span><br><span class="line">    public void deleteNode(ListNode node)&#123;</span><br><span class="line">        if(node.next == null)&#123;</span><br><span class="line">            node = null;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            node.val = node.next.val;</span><br><span class="line">            node.next = node.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Solution45 x = new Solution45();</span><br><span class="line">        System.out.println(x.LastRemaining_Solution(5,3));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="不用加减乘除做加法"><a href="#不用加减乘除做加法" class="headerlink" title="不用加减乘除做加法"></a>不用加减乘除做加法</h1><p>写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Solution47 &#123;</span><br><span class="line">    public int Add(int num1,int num2) &#123;</span><br><span class="line">        int sum,carry;</span><br><span class="line">        do&#123;</span><br><span class="line">            sum = num1 ^ num2;</span><br><span class="line">            carry = (num1 &amp; num2)&lt;&lt;1;</span><br><span class="line">            num1 = sum;</span><br><span class="line">            num2 = carry;</span><br><span class="line">        &#125;while (num2 != 0);</span><br><span class="line">        return num1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="把字符串转化为整数"><a href="#把字符串转化为整数" class="headerlink" title="把字符串转化为整数"></a>把字符串转化为整数</h1><p>将一个字符串转换成一个整数(实现Integer.valueOf(string)的功能，<br>但是string不符合数字要求时返回0)，要求不能使用字符串转换整数的库函数。<br>数值为0或者字符串不是一个合法的数值则返回0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class Solution48 &#123;</span><br><span class="line">    public int StrToInt(String str) &#123;</span><br><span class="line">        if(str == null || str.length() == 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int result = 0;</span><br><span class="line">        boolean flag = true;</span><br><span class="line">        if(str.charAt(0) == &apos;+&apos;)&#123;</span><br><span class="line">            str = str.substring(1);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(str.charAt(0) ==&apos;-&apos;)&#123;</span><br><span class="line">            flag = false;</span><br><span class="line">            str = str.substring(1);</span><br><span class="line">        &#125;</span><br><span class="line">        int k = 1;</span><br><span class="line">        for(int i = 0; i &lt; str.length();i++)&#123;</span><br><span class="line">            int num = str.charAt(str.length()-1-i) - &apos;0&apos;;</span><br><span class="line">            if(num &gt;9 || num &lt; 0)&#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            int a = (num) *k;</span><br><span class="line">            result += a;</span><br><span class="line">            k = k * 10;</span><br><span class="line">        &#125;</span><br><span class="line">        return (flag? result : -result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Solution48 x =new Solution48();</span><br><span class="line">        System.out.println(x.StrToInt(&quot;123f&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="数组中的重复数字"><a href="#数组中的重复数字" class="headerlink" title="数组中的重复数字"></a>数组中的重复数字</h1><p>在一个长度为n的数组里的所有数字都在0到n-1的范围内。<br>数组中某些数字是重复的，但不知道有几个数字是重复的。<br>也不知道每个数字重复几次。请找出数组中任意一个重复的数字。<br>例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Solution49 &#123;</span><br><span class="line">    public boolean duplicate(int numbers[], int length, int[] duplication) &#123;</span><br><span class="line">        int i = 0;</span><br><span class="line">        while (i &lt; length)&#123;</span><br><span class="line">            if(numbers[i] != i)&#123;</span><br><span class="line">                if(numbers[numbers[i]] == numbers[i] )&#123;</span><br><span class="line">                    duplication[0] = numbers[i];</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">                else</span><br><span class="line">                    exch(numbers,numbers[i],i);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public void exch(int[] numbers, int a ,int b )&#123;</span><br><span class="line">        int temp = numbers[a];</span><br><span class="line">        numbers[a] = numbers[b];</span><br><span class="line">        numbers[b] = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Solution49 x = new Solution49();</span><br><span class="line">        int[] numbers = &#123;0&#125;;</span><br><span class="line">        int[] d = new int[1];</span><br><span class="line">        System.out.println(x.duplicate(numbers, 1, d));</span><br><span class="line">        System.out.println(d[0]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="构建乘积数组"><a href="#构建乘积数组" class="headerlink" title="构建乘积数组"></a>构建乘积数组</h1><p>给定一个数组A[0,1,…,n-1],请构建一个数组B[0,1,…,n-1],<br>其中B中的元素B[i]=A[0]<em>A[1]</em>…<em>A[i-1]</em>A[i+1]<em>…</em>A[n-1]。不能使用除法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Solution50 &#123;</span><br><span class="line">    public int[] multiply(int[] A) &#123;</span><br><span class="line">        int[] down = new int[A.length];</span><br><span class="line">        int[] up = new int[A.length];</span><br><span class="line">        down[0] = 1;</span><br><span class="line">        up[A.length - 1] = 1;</span><br><span class="line">        for (int i = 1; i &lt; A.length; i++) &#123;</span><br><span class="line">            down[i] = down[i-1] * A[i-1];</span><br><span class="line">            up[A.length-1-i] = up[A.length - i] * A[A.length - i];</span><br><span class="line">        &#125;</span><br><span class="line">        int[] B = new int[A.length];</span><br><span class="line">        for(int i = 0; i &lt; A.length; i++)&#123;</span><br><span class="line">            B[i] = up[i] * down[i];</span><br><span class="line">        &#125;</span><br><span class="line">        return B;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p># </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/09/csapp/" rel="next" title="CSAPP">
+                <i class="fa fa-chevron-left"></i> CSAPP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Ao Wang" />
+            
+              <p class="site-author-name" itemprop="name">Ao Wang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二维数组中的查找"><span class="nav-number">1.</span> <span class="nav-text">二维数组中的查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从尾到头打印链表"><span class="nav-number">2.</span> <span class="nav-text">从尾到头打印链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重建二叉树"><span class="nav-number">3.</span> <span class="nav-text">重建二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用两个栈实现队列"><span class="nav-number">4.</span> <span class="nav-text">用两个栈实现队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#旋转数组的最小数字"><span class="nav-number">5.</span> <span class="nav-text">旋转数组的最小数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斐波那契数列"><span class="nav-number">6.</span> <span class="nav-text">斐波那契数列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二进制中1的个数"><span class="nav-number">7.</span> <span class="nav-text">二进制中1的个数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数值的整数次方"><span class="nav-number">8.</span> <span class="nav-text">数值的整数次方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调整顺序使奇数位于偶数前面"><span class="nav-number">9.</span> <span class="nav-text">调整顺序使奇数位于偶数前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表中倒数第k个节点"><span class="nav-number">10.</span> <span class="nav-text">链表中倒数第k个节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反转链表"><span class="nav-number">11.</span> <span class="nav-text">反转链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并两个排序链表"><span class="nav-number">12.</span> <span class="nav-text">合并两个排序链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树的子结构"><span class="nav-number">13.</span> <span class="nav-text">树的子结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树的镜像"><span class="nav-number">14.</span> <span class="nav-text">二叉树的镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺时针打印矩阵"><span class="nav-number">15.</span> <span class="nav-text">顺时针打印矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#包含Min函数的栈"><span class="nav-number">16.</span> <span class="nav-text">包含Min函数的栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈的压入弹出序列"><span class="nav-number">17.</span> <span class="nav-text">栈的压入弹出序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉搜索树的后序遍历序列"><span class="nav-number">18.</span> <span class="nav-text">二叉搜索树的后序遍历序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树中和为某一值的路径"><span class="nav-number">19.</span> <span class="nav-text">二叉树中和为某一值的路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂链表的复制"><span class="nav-number">20.</span> <span class="nav-text">复杂链表的复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉搜索树与双向链表"><span class="nav-number">21.</span> <span class="nav-text">二叉搜索树与双向链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串的排列"><span class="nav-number">22.</span> <span class="nav-text">字符串的排列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中出现次数超过一半的数字"><span class="nav-number">23.</span> <span class="nav-text">数组中出现次数超过一半的数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最小的k个数"><span class="nav-number">24.</span> <span class="nav-text">最小的k个数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连续子数组的最大和"><span class="nav-number">25.</span> <span class="nav-text">连续子数组的最大和</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从1到n整数中1出现的次数"><span class="nav-number">26.</span> <span class="nav-text">从1到n整数中1出现的次数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#把数组排成最小的数"><span class="nav-number">27.</span> <span class="nav-text">把数组排成最小的数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#丑数"><span class="nav-number">28.</span> <span class="nav-text">丑数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中的逆序对"><span class="nav-number">29.</span> <span class="nav-text">数组中的逆序对</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两个链表的第一个公共节点"><span class="nav-number">30.</span> <span class="nav-text">两个链表的第一个公共节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数字在排序数组中出现的次数"><span class="nav-number">31.</span> <span class="nav-text">数字在排序数组中出现的次数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树的深度"><span class="nav-number">32.</span> <span class="nav-text">二叉树的深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入一棵二叉树，判断该二叉树是否是平衡二叉树。"><span class="nav-number">33.</span> <span class="nav-text">输入一棵二叉树，判断该二叉树是否是平衡二叉树。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中只出现一次的数字"><span class="nav-number">34.</span> <span class="nav-text">数组中只出现一次的数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#和为S的正数序列"><span class="nav-number">35.</span> <span class="nav-text">和为S的正数序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扑克牌的顺子"><span class="nav-number">36.</span> <span class="nav-text">扑克牌的顺子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#圆圈中最后剩下的数字"><span class="nav-number">37.</span> <span class="nav-text">圆圈中最后剩下的数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不用加减乘除做加法"><span class="nav-number">38.</span> <span class="nav-text">不用加减乘除做加法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#把字符串转化为整数"><span class="nav-number">39.</span> <span class="nav-text">把字符串转化为整数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中的重复数字"><span class="nav-number">40.</span> <span class="nav-text">数组中的重复数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建乘积数组"><span class="nav-number">41.</span> <span class="nav-text">构建乘积数组</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ao Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
