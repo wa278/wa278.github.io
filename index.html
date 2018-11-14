@@ -253,6 +253,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/14/HTTP状态码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang Ao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/14/HTTP状态码/" itemprop="url">HTTP状态码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T13:54:43+08:00">
+                2018-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- TOC -->
+<ul>
+<li><a href="#返回结果http状态码">返回结果HTTP状态码</a><ul>
+<li><a href="#2xx-成功">2xx 成功</a><ul>
+<li><a href="#200-ok">200 OK</a></li>
+<li><a href="#204-no-content">204 No Content</a></li>
+<li><a href="#206-partial-content">206 Partial Content</a></li>
+</ul>
+</li>
+<li><a href="#3xx-重定向">3xx 重定向</a><ul>
+<li><a href="#301-moved-permanently">301 Moved Permanently</a></li>
+<li><a href="#302-found">302 Found</a></li>
+<li><a href="#303-see-other">303 See Other</a></li>
+<li><a href="#304-not-modified">304 Not Modified</a></li>
+<li><a href="#307-temperorary-redirect">307 Temperorary Redirect</a></li>
+</ul>
+</li>
+<li><a href="#4xx-客户端错误">4xx 客户端错误</a><ul>
+<li><a href="#400-bad-request">400 Bad Request</a></li>
+<li><a href="#401-unauthrized">401 Unauthrized</a></li>
+<li><a href="#403-forbidden">403 Forbidden</a></li>
+<li><a href="#403-not-found">403 Not Found</a></li>
+</ul>
+</li>
+<li><a href="#5xx-服务器错误">5xx 服务器错误</a><ul>
+<li><a href="#501-internal-server-error">501 Internal Server Error</a></li>
+<li><a href="#503-service-unavailable">503 Service Unavailable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="返回结果HTTP状态码"><a href="#返回结果HTTP状态码" class="headerlink" title="返回结果HTTP状态码"></a>返回结果HTTP状态码</h1><p>HTTP状态码负责表示客户端的HTTP请求的返回结果、标记服务器端的处理是否正常、通知出现的错误等工作。<br>数字中的第一位指定了相应类别，后两位无分类。响应的类别有以下5中： </p>
+<pre><code>|       |  类别                           |原因短语|
+| 1. 1xx| informational (信息性状态码)    |接收的请求正在处理|   
+| 2. 2xx| success (成功状态码)            |请求正常处理完毕|   
+| 3. 3xx| redirection (重定向状态码)      |需要进行附加操作以完成请求|   
+| 4. 4xx| client error (客户端错误状态码)  |服务器无法处理请求|   
+| 5. 5xx| server error (服务器错误状态码)  |服务器处理请求出错|  
+</code></pre><p>只要遵守状态码类别的定义，即使改变RFC2616中定义的状态码，或服务器端自行创建状态码都没问题。   </p>
+<h2 id="2xx-成功"><a href="#2xx-成功" class="headerlink" title="2xx 成功"></a>2xx 成功</h2><h3 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h3><p>表示从客户端发来的请求在服务器端被正常处理了。但是在响应报文内，随状态码一起返回的信息会因为方法的不同而发生改变。   </p>
+<h3 id="204-No-Content"><a href="#204-No-Content" class="headerlink" title="204 No Content"></a>204 No Content</h3><p>该状态码代表服务器接收的请求已经成功处理，但在返回的响应中不包含实体的主体部分。另外，也不允许返回任何实体的主体。一般在只需要向服务器发送信息，而不需要返回信息给客户端时使用。   </p>
+<h3 id="206-Partial-Content"><a href="#206-Partial-Content" class="headerlink" title="206 Partial Content"></a>206 Partial Content</h3><p>该状态码表示客户端进行了范围请求，而服务器成功执行了这部分的GET请求。响应报文中包含由<code>Content-Range</code>指定范围的实体内容。   </p>
+<h2 id="3xx-重定向"><a href="#3xx-重定向" class="headerlink" title="3xx 重定向"></a>3xx 重定向</h2><p>3xx响应结果表明浏览器需要执行某些特殊的处理以正确处理请求。   </p>
+<h3 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h3><p>永久性重定向。该状态码表示请求的资源被分配了新的<code>URI</code>，同时，书签也应按需进行更新。   </p>
+<h3 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h3><p>临时性重定向。该状态码也表示请求的资源被分配了新的<code>URI</code>，但是临时性质的。并不会更新书签。  </p>
+<h3 id="303-See-Other"><a href="#303-See-Other" class="headerlink" title="303 See Other"></a>303 See Other</h3><p>该状态码表示请求的资源存在另一个<code>URI</code>，应使用GET方法定向获取请求的资源。与302的区别是，303明确表示客户端应该用GET方法获取资源。<br>当返回301、302、303时，几乎所有的浏览器都会把POST改成GET，并删除请求报文的主体，之后请求会自动再次发送。但301、302标准时禁止把<code>POST</code>方法改成<code>GET</code>的。</p>
+<h3 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h3><p>该状态码表示客户端发送附带条件的请求时，服务器允许访问资源，但因发生请求未满足的条件的情况后，直接返回304 <code>Not Modified</code>（服务器资源未改变，可直接使用客户端未过期的资源），返回时，也不包含任何响应的主体部分。并且304和重定向没有什么关系。   </p>
+<h3 id="307-Temperorary-Redirect"><a href="#307-Temperorary-Redirect" class="headerlink" title="307 Temperorary Redirect"></a>307 Temperorary Redirect</h3><p>临时重定向。与302有同样的含义，但307会按照标准，不会将<code>POST</code>改成<code>GET</code>。   </p>
+<h2 id="4xx-客户端错误"><a href="#4xx-客户端错误" class="headerlink" title="4xx 客户端错误"></a>4xx 客户端错误</h2><h3 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h3><p>表示请求报文中存在语法错误，需修改请求的内容再次发送请求。另外，浏览器会像200 OK一样对待该状态码。   </p>
+<h3 id="401-Unauthrized"><a href="#401-Unauthrized" class="headerlink" title="401 Unauthrized"></a>401 Unauthrized</h3><p>表示发送的请求需要有通过HTTP认证（BASIC 认证、DIGEST 认证的认证信息。若之前已进行过1次请求，则表示用户认证失败。<br>返回包含401的响应必须包含一个适用于被请求资源的<code>WWW-Authenticate</code> 首部以质询用户信息。当浏览器初次接收401响应，会弹出认证用的窗口。  </p>
+<h3 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h3><p>表明请求的资源被服务器拒绝了。并且服务器没有必要给出详细的拒绝理由。但是可以在实体的主体部分对原因进行描述。未获得文件系统的访问授权，访问权限出现某些问题（从未授权的发送元IP地址试图访问）等都可能是403的原因。   </p>
+<h3 id="403-Not-Found"><a href="#403-Not-Found" class="headerlink" title="403 Not Found"></a>403 Not Found</h3><p>表明服务器端上没有请求的资源。除此之外，还可以在服务器拒绝请求且不想说明理由时使用。   </p>
+<h2 id="5xx-服务器错误"><a href="#5xx-服务器错误" class="headerlink" title="5xx 服务器错误"></a>5xx 服务器错误</h2><h3 id="501-Internal-Server-Error"><a href="#501-Internal-Server-Error" class="headerlink" title="501 Internal Server Error"></a>501 Internal Server Error</h3><p>表明服务器端在执行请求时发生了错误。   </p>
+<h3 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h3><p>表明服务器端暂时处于超负载或正在停机维护，现在无法处理请求。<br><code>注：状态码有可能和实际状况不一致。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/剑指Offer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1705,7 +1880,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="返回结果HTTP状态码 2xx 成功 200 OK 204 No Content 206 Partial Content   3xx 重定向 301 Moved Permanently 302 Found 303 See Other 304 Not Modified 307 Temperorary Redirect   4xx 客户端错误 400 Bad Request 401 Unauthr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP状态码">
+<meta property="og:url" content="http://yoursite.com/2018/11/14/HTTP状态码/index.html">
+<meta property="og:site_name" content="Wang Ao&#39;s blog">
+<meta property="og:description" content="返回结果HTTP状态码 2xx 成功 200 OK 204 No Content 206 Partial Content   3xx 重定向 301 Moved Permanently 302 Found 303 See Other 304 Not Modified 307 Temperorary Redirect   4xx 客户端错误 400 Bad Request 401 Unauthr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-14T05:54:40.769Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP状态码">
+<meta name="twitter:description" content="返回结果HTTP状态码 2xx 成功 200 OK 204 No Content 206 Partial Content   3xx 重定向 301 Moved Permanently 302 Found 303 See Other 304 Not Modified 307 Temperorary Redirect   4xx 客户端错误 400 Bad Request 401 Unauthr">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/14/HTTP状态码/"/>
+
+
+
+
+
+  <title>HTTP状态码 | Wang Ao's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/wa278" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wang Ao's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/14/HTTP状态码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang Ao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP状态码</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T13:54:43+08:00">
+                2018-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- TOC -->
+<ul>
+<li><a href="#返回结果http状态码">返回结果HTTP状态码</a><ul>
+<li><a href="#2xx-成功">2xx 成功</a><ul>
+<li><a href="#200-ok">200 OK</a></li>
+<li><a href="#204-no-content">204 No Content</a></li>
+<li><a href="#206-partial-content">206 Partial Content</a></li>
+</ul>
+</li>
+<li><a href="#3xx-重定向">3xx 重定向</a><ul>
+<li><a href="#301-moved-permanently">301 Moved Permanently</a></li>
+<li><a href="#302-found">302 Found</a></li>
+<li><a href="#303-see-other">303 See Other</a></li>
+<li><a href="#304-not-modified">304 Not Modified</a></li>
+<li><a href="#307-temperorary-redirect">307 Temperorary Redirect</a></li>
+</ul>
+</li>
+<li><a href="#4xx-客户端错误">4xx 客户端错误</a><ul>
+<li><a href="#400-bad-request">400 Bad Request</a></li>
+<li><a href="#401-unauthrized">401 Unauthrized</a></li>
+<li><a href="#403-forbidden">403 Forbidden</a></li>
+<li><a href="#403-not-found">403 Not Found</a></li>
+</ul>
+</li>
+<li><a href="#5xx-服务器错误">5xx 服务器错误</a><ul>
+<li><a href="#501-internal-server-error">501 Internal Server Error</a></li>
+<li><a href="#503-service-unavailable">503 Service Unavailable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="返回结果HTTP状态码"><a href="#返回结果HTTP状态码" class="headerlink" title="返回结果HTTP状态码"></a>返回结果HTTP状态码</h1><p>HTTP状态码负责表示客户端的HTTP请求的返回结果、标记服务器端的处理是否正常、通知出现的错误等工作。<br>数字中的第一位指定了相应类别，后两位无分类。响应的类别有以下5中： </p>
+<pre><code>|       |  类别                           |原因短语|
+| 1. 1xx| informational (信息性状态码)    |接收的请求正在处理|   
+| 2. 2xx| success (成功状态码)            |请求正常处理完毕|   
+| 3. 3xx| redirection (重定向状态码)      |需要进行附加操作以完成请求|   
+| 4. 4xx| client error (客户端错误状态码)  |服务器无法处理请求|   
+| 5. 5xx| server error (服务器错误状态码)  |服务器处理请求出错|  
+</code></pre><p>只要遵守状态码类别的定义，即使改变RFC2616中定义的状态码，或服务器端自行创建状态码都没问题。   </p>
+<h2 id="2xx-成功"><a href="#2xx-成功" class="headerlink" title="2xx 成功"></a>2xx 成功</h2><h3 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h3><p>表示从客户端发来的请求在服务器端被正常处理了。但是在响应报文内，随状态码一起返回的信息会因为方法的不同而发生改变。   </p>
+<h3 id="204-No-Content"><a href="#204-No-Content" class="headerlink" title="204 No Content"></a>204 No Content</h3><p>该状态码代表服务器接收的请求已经成功处理，但在返回的响应中不包含实体的主体部分。另外，也不允许返回任何实体的主体。一般在只需要向服务器发送信息，而不需要返回信息给客户端时使用。   </p>
+<h3 id="206-Partial-Content"><a href="#206-Partial-Content" class="headerlink" title="206 Partial Content"></a>206 Partial Content</h3><p>该状态码表示客户端进行了范围请求，而服务器成功执行了这部分的GET请求。响应报文中包含由<code>Content-Range</code>指定范围的实体内容。   </p>
+<h2 id="3xx-重定向"><a href="#3xx-重定向" class="headerlink" title="3xx 重定向"></a>3xx 重定向</h2><p>3xx响应结果表明浏览器需要执行某些特殊的处理以正确处理请求。   </p>
+<h3 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h3><p>永久性重定向。该状态码表示请求的资源被分配了新的<code>URI</code>，同时，书签也应按需进行更新。   </p>
+<h3 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h3><p>临时性重定向。该状态码也表示请求的资源被分配了新的<code>URI</code>，但是临时性质的。并不会更新书签。  </p>
+<h3 id="303-See-Other"><a href="#303-See-Other" class="headerlink" title="303 See Other"></a>303 See Other</h3><p>该状态码表示请求的资源存在另一个<code>URI</code>，应使用GET方法定向获取请求的资源。与302的区别是，303明确表示客户端应该用GET方法获取资源。<br>当返回301、302、303时，几乎所有的浏览器都会把POST改成GET，并删除请求报文的主体，之后请求会自动再次发送。但301、302标准时禁止把<code>POST</code>方法改成<code>GET</code>的。</p>
+<h3 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h3><p>该状态码表示客户端发送附带条件的请求时，服务器允许访问资源，但因发生请求未满足的条件的情况后，直接返回304 <code>Not Modified</code>（服务器资源未改变，可直接使用客户端未过期的资源），返回时，也不包含任何响应的主体部分。并且304和重定向没有什么关系。   </p>
+<h3 id="307-Temperorary-Redirect"><a href="#307-Temperorary-Redirect" class="headerlink" title="307 Temperorary Redirect"></a>307 Temperorary Redirect</h3><p>临时重定向。与302有同样的含义，但307会按照标准，不会将<code>POST</code>改成<code>GET</code>。   </p>
+<h2 id="4xx-客户端错误"><a href="#4xx-客户端错误" class="headerlink" title="4xx 客户端错误"></a>4xx 客户端错误</h2><h3 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h3><p>表示请求报文中存在语法错误，需修改请求的内容再次发送请求。另外，浏览器会像200 OK一样对待该状态码。   </p>
+<h3 id="401-Unauthrized"><a href="#401-Unauthrized" class="headerlink" title="401 Unauthrized"></a>401 Unauthrized</h3><p>表示发送的请求需要有通过HTTP认证（BASIC 认证、DIGEST 认证的认证信息。若之前已进行过1次请求，则表示用户认证失败。<br>返回包含401的响应必须包含一个适用于被请求资源的<code>WWW-Authenticate</code> 首部以质询用户信息。当浏览器初次接收401响应，会弹出认证用的窗口。  </p>
+<h3 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h3><p>表明请求的资源被服务器拒绝了。并且服务器没有必要给出详细的拒绝理由。但是可以在实体的主体部分对原因进行描述。未获得文件系统的访问授权，访问权限出现某些问题（从未授权的发送元IP地址试图访问）等都可能是403的原因。   </p>
+<h3 id="403-Not-Found"><a href="#403-Not-Found" class="headerlink" title="403 Not Found"></a>403 Not Found</h3><p>表明服务器端上没有请求的资源。除此之外，还可以在服务器拒绝请求且不想说明理由时使用。   </p>
+<h2 id="5xx-服务器错误"><a href="#5xx-服务器错误" class="headerlink" title="5xx 服务器错误"></a>5xx 服务器错误</h2><h3 id="501-Internal-Server-Error"><a href="#501-Internal-Server-Error" class="headerlink" title="501 Internal Server Error"></a>501 Internal Server Error</h3><p>表明服务器端在执行请求时发生了错误。   </p>
+<h3 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h3><p>表明服务器端暂时处于超负载或正在停机维护，现在无法处理请求。<br><code>注：状态码有可能和实际状况不一致。</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/13/剑指Offer/" rel="next" title="剑指Offer">
+                <i class="fa fa-chevron-left"></i> 剑指Offer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Ao Wang" />
+            
+              <p class="site-author-name" itemprop="name">Ao Wang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#返回结果HTTP状态码"><span class="nav-number">1.</span> <span class="nav-text">返回结果HTTP状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2xx-成功"><span class="nav-number">1.1.</span> <span class="nav-text">2xx 成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#200-OK"><span class="nav-number">1.1.1.</span> <span class="nav-text">200 OK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#204-No-Content"><span class="nav-number">1.1.2.</span> <span class="nav-text">204 No Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#206-Partial-Content"><span class="nav-number">1.1.3.</span> <span class="nav-text">206 Partial Content</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3xx-重定向"><span class="nav-number">1.2.</span> <span class="nav-text">3xx 重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#301-Moved-Permanently"><span class="nav-number">1.2.1.</span> <span class="nav-text">301 Moved Permanently</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#302-Found"><span class="nav-number">1.2.2.</span> <span class="nav-text">302 Found</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#303-See-Other"><span class="nav-number">1.2.3.</span> <span class="nav-text">303 See Other</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#304-Not-Modified"><span class="nav-number">1.2.4.</span> <span class="nav-text">304 Not Modified</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#307-Temperorary-Redirect"><span class="nav-number">1.2.5.</span> <span class="nav-text">307 Temperorary Redirect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4xx-客户端错误"><span class="nav-number">1.3.</span> <span class="nav-text">4xx 客户端错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#400-Bad-Request"><span class="nav-number">1.3.1.</span> <span class="nav-text">400 Bad Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#401-Unauthrized"><span class="nav-number">1.3.2.</span> <span class="nav-text">401 Unauthrized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-Forbidden"><span class="nav-number">1.3.3.</span> <span class="nav-text">403 Forbidden</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-Not-Found"><span class="nav-number">1.3.4.</span> <span class="nav-text">403 Not Found</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5xx-服务器错误"><span class="nav-number">1.4.</span> <span class="nav-text">5xx 服务器错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#501-Internal-Server-Error"><span class="nav-number">1.4.1.</span> <span class="nav-text">501 Internal Server Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#503-Service-Unavailable"><span class="nav-number">1.4.2.</span> <span class="nav-text">503 Service Unavailable</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ao Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
