@@ -1675,8 +1675,17 @@
 <ol>
 <li>Ad-hoc 封闭 通过编程实现封闭，不推荐使用，但也是最常用的封闭。</li>
 <li>栈封闭 只通过局部变量才能访问对象，局部变量只有此线程此函数才能访问，所以是安全的。其他线程无法访问。</li>
-<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。Threadlocal<t> 本质是一个Map&lt;Thread,T&gt;。  </t></li>
+<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。<br><img src="../img/threadlocal.jpg" alt="avatar"></li>
 </ol>
+<ul>
+<li>每个Thread线程内部都有一个Map。</li>
+<li>Map里面存储线程本地对象（key）和线程的变量副本（value）</li>
+<li>但是，Thread内部的Map是由ThreadLocal维护的，由ThreadLocal负责向map获取和设置线程的变量值。</li>
+</ul>
+<p>threadlocal 核心方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public T get()</span><br><span class="line">public void set(T value)</span><br><span class="line">public void remove()</span><br></pre></td></tr></table></figure></p>
+<p>threadlocalMap 类<br><img src="../img/threadlocalMap.png" alt="avatar"></p>
+<p>threadLocalMap 采用的是线性探测法</p>
+<p>适用于无状态，副本变量独立后不影响业务逻辑的高并发场景。如果如果业务逻辑强依赖于副本变量，则不适合用ThreadLocal解决，需要另寻解决方案。</p>
 <h1 id="用锁来保护对象（可变，共享）"><a href="#用锁来保护对象（可变，共享）" class="headerlink" title="用锁来保护对象（可变，共享）"></a>用锁来保护对象（可变，共享）</h1><ul>
 <li>同一个对象的读取都要同一把锁保护。</li>
 <li>同一个不变性条件涉及的对象，都要用同一把锁。</li>
@@ -1703,11 +1712,11 @@
 <li>volatile变量  </li>
 </ol>
 <h1 id="发布与溢出-（指针泄露）"><a href="#发布与溢出-（指针泄露）" class="headerlink" title="发布与溢出 （指针泄露）"></a>发布与溢出 （指针泄露）</h1><p>在构造函数中发布对象时，可能导致 this引用隐式溢出，因为其他的对象的方法可能会调用this对象的方法，而this还没有构造完成。可以使用工厂方法先创建对象，再发布对象，而不是在构造函数中发布。</p>
-<h1 id="安全发布-（创建一个对象，可见性）"><a href="#安全发布-（创建一个对象，可见性）" class="headerlink" title="安全发布 （创建一个对象，可见性）"></a>安全发布 （创建一个对象，可见性）</h1><p>安全发布就是既不让引用溢出，又让所有线程都要看到这个对象（<strong><em>此对象的可见性</em></strong>）。安全发布的常用模式：</p>
+<h1 id="安全发布-（创建一个对象，可见性）"><a href="#安全发布-（创建一个对象，可见性）" class="headerlink" title="安全发布 （创建一个对象，可见性）"></a>安全发布 （创建一个对象，可见性）</h1><p>安全发布就是既不让引用溢出，又让所有线程都要看到这个对象（<strong><em>此对象的可见性</em></strong>）1 分配内存 2 初始化对象 3 引用指向内存 安全发布保证123顺序执行。安全发布的常用模式：</p>
 <ol>
 <li>使用静态初始化<strong><em>static</em></strong>,静态对象在类被加载时创建，存在方法区，JVM内部会保证只有一个线程会创建对象，但是在以后使用时候不能保证像volatile一样的可见性，也会拷贝一份进线程的虚拟机栈。</li>
 <li>用volatile 和 原子变量 atomic</li>
-<li>保存在某个正确构造的final域类型中，即事实不可变对象。 （final 引用不能修改 ， 事实不可变对象也不能修改，就不存在可见性问题了）</li>
+<li>保存在某个正确构造的final域类型中，即事实不可变对象。 对于含有final域的对象，JVM必须保证对对象的初始引用在构造函数之后执行，不能乱序执行（out of order），也就是可以保证一旦你得到了引用，final域的值都是完成了初始化的，也就是书中所说的“初始化安全性”的保证。</li>
 <li>保存在有所的容器里例如 hashtable, synchronizedMap, ConcurrentMap,CopyOnWriteArrayList, CopyOnWriteArraySet, SynchronizedList,BlockingQueue,ConcurrentLinkedQueue等等。  </li>
 </ol>
 <h1 id="将非线程安全的对象变成线程安全的对象"><a href="#将非线程安全的对象变成线程安全的对象" class="headerlink" title="将非线程安全的对象变成线程安全的对象"></a>将非线程安全的对象变成线程安全的对象</h1><hr>
@@ -1946,7 +1955,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
