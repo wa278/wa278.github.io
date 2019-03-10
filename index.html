@@ -1425,7 +1425,7 @@
             <h1 id="JVM的内存管理机制"><a href="#JVM的内存管理机制" class="headerlink" title="JVM的内存管理机制"></a>JVM的内存管理机制</h1><hr>
 <p>线程私有的数据区</p>
 <h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>当前线程执行字节码的行号指示器，每个线程都需要一个独立的程序计数器。如果正在执行的是Java方法，计数器记录的是虚拟机字节码指令地址。如果执行的是Native方法，计数器的值为空。唯一不会抛出OutOfMemoryError异常的区域。</p>
-<h2 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧用于储存 局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法调用直至执行完成的过程，对应一个栈帧在虚拟机栈中入栈到出栈的过程。局部变量表在编译器就在class对象里面分配完成了，大小是确定的。</p>
+<h2 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h2><p>每个方法在执行的同时都会创建一个栈帧用于储存 局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法调用直至执行完成的过程，对应一个栈帧在虚拟机栈中入栈到出栈的过程。局部变量表在编译期就在class对象里面分配完成了，大小是确定的。</p>
 <h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><p>本地方法栈为虚拟机使用到的Native方法服务。</p>
 <hr>
 <p>所有线程共享的数据区</p>
@@ -1454,7 +1454,7 @@
 <hr>
 <p>老年代收集器</p>
 <h3 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h3><p>serial old 是老年代的单线程收集器，使用标记-整理算法。用途是作为CMS收集器的后备预案，在CMS发生Concurrent Mode Failure 时使用。</p>
-<h3 id="ParNew-Old-收集器"><a href="#ParNew-Old-收集器" class="headerlink" title="ParNew Old 收集器"></a>ParNew Old 收集器</h3><p>ParNew Old 可以与 parallel scavenge 配合使用，在看重吞吐量和CPU资源敏感的场合下，都可以使用parallel scavenge 和 Parnew old 组合。</p>
+<h3 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h3><p>parallel Old 可以与 parallel scavenge 配合使用，在看重吞吐量和CPU资源敏感的场合下，都可以使用parallel scavenge 和 Parallel old 组合。</p>
 <h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>CMS收集器是一种以获得最短回收停顿时间为目标的收集器，在注重响应速度的服务上，很适合使用。CMS基于标记清除算法，整个过程分为四个步骤：</p>
 <ol>
 <li>初始标记</li>
