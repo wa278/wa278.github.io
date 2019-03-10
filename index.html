@@ -1762,6 +1762,15 @@
 <p>条件谓语中包含的变量必须由LOCK守护，并在检查条件谓词和调用await,signal方法时，必须持有lock对象。</p>
 <h2 id="AbstractQueuedSynchronizer-AQS-以后用到再继续补充"><a href="#AbstractQueuedSynchronizer-AQS-以后用到再继续补充" class="headerlink" title="AbstractQueuedSynchronizer(AQS) 以后用到再继续补充"></a>AbstractQueuedSynchronizer(AQS) 以后用到再继续补充</h2><p>ReentrantLock,Semaphore等都是通过继承AQS实现的。AQS的基本操作包括各种形式的获取操作和释放操作，获取操作是一种依赖状态的操作，经常会阻塞，释放操作不是一个可以阻塞的操作。</p>
 <p>AQS负责管理同步器的状态，getState,setState,compareAndSetState等。ReentrantLock用状态表示重入该锁的次数，Semaphore表示剩余的许可数量。</p>
+<p><img src="../img/AQS.png" alt="avatar"></p>
+<p>tryaquire 步骤</p>
+<ul>
+<li>tryAcquire()尝试直接去获取资源，如果成功则直接返回；这一步就是非公平锁的来源。</li>
+<li>addWaiter()将该线程加入等待队列的尾部，并标记为独占模式；</li>
+<li>acquireQueued()使线程在等待队列中获取资源，一直获取到资源后才返回。如果在整个等待过程中被中断过，则返回true，否则返回false。</li>
+<li>如果线程在等待过程中被中断过，它是不响应的。只是获取资源后才再进行自我中断selfInterrupt()，将中断补上。</li>
+</ul>
+<p>读写锁 用状态的高16位表示读状态，低16位表示写状态。</p>
 <hr>
 <h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><p>interrupt()中断目标线程，isInterrupted()返回目标线程的中断状态，interrupted消除当前线程的中断状态（将true变成false）,并返回之前的值（ture）.如果以前是fasle那就还是false,返回false.Thread.sleep,Object.wait等发现中断会提前返回，响应中断时执行的操作包括清除中断状态，并抛出InterruptedException。调用interrupt并不意味着立即停止，只是传递了请求中断的消息。通常，中断是实现取消的最合理方式。</p>
 <h2 id="中断策略"><a href="#中断策略" class="headerlink" title="中断策略"></a>中断策略</h2><p>处理InterruptedException:</p>
