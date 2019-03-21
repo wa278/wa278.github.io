@@ -88,14 +88,14 @@
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
 <meta property="og:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  不可变对象（不可变）不可变对象的赋值操作是原子的，所以不可变对象是线程安全的。不可变对象需要满足以下条件：  对象创建后器其状态就不能修改（不提供修改的方法） 对象的所有域都是final类型 对象都是正确创建的，this指针">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/07/24/java多线程/img/threadlocal.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/07/24/java多线程/img/threadlocalMap.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/24/java多线程/img/AQS.png">
-<meta property="og:updated_time" content="2019-03-10T06:54:31.154Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/java多线程/threadlocal.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/java多线程/threadlocalMap.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/java多线程/AQS.png">
+<meta property="og:updated_time" content="2019-03-21T12:30:58.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java多线程">
 <meta name="twitter:description" content="线程安全性核心在于管理共享的，可变的状态当多个线程访问一个可变的变量时，如果没有合适的措施，就会产生错误，解决方案有两个：  修改状态为不可变对象 在访问变量时使用同步机制  不可变对象（不可变）不可变对象的赋值操作是原子的，所以不可变对象是线程安全的。不可变对象需要满足以下条件：  对象创建后器其状态就不能修改（不提供修改的方法） 对象的所有域都是final类型 对象都是正确创建的，this指针">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/24/java多线程/img/threadlocal.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/24/java多线程/threadlocal.jpg">
 
 
 
@@ -344,7 +344,7 @@
 <ol>
 <li>Ad-hoc 封闭 通过编程实现封闭，不推荐使用，但也是最常用的封闭。</li>
 <li>栈封闭 只通过局部变量才能访问对象，局部变量只有此线程此函数才能访问，所以是安全的。其他线程无法访问。</li>
-<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。<br><img src="/2018/07/24/java多线程/img/threadlocal.jpg" alt="avatar"></li>
+<li>ThreadLocal类 提供了get,set 方法，为每个线程都保留一个相同名称但是独立的变量。<br><img src="/2018/07/24/java多线程/threadlocal.jpg" alt="avatar"></li>
 </ol>
 <ul>
 <li>每个Thread线程内部都有一个Map。</li>
@@ -352,7 +352,7 @@
 <li>但是，Thread内部的Map是由ThreadLocal维护的，由ThreadLocal负责向map获取和设置线程的变量值。</li>
 </ul>
 <p>threadlocal 核心方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public T get()</span><br><span class="line">public void set(T value)</span><br><span class="line">public void remove()</span><br></pre></td></tr></table></figure></p>
-<p>threadlocalMap 类<br><img src="/2018/07/24/java多线程/img/threadlocalMap.png" alt="avatar"></p>
+<p>threadlocalMap 类<br><img src="/2018/07/24/java多线程/threadlocalMap.png" alt="avatar"></p>
 <p>threadLocalMap 采用的是线性探测法</p>
 <p>适用于无状态，副本变量独立后不影响业务逻辑的高并发场景。如果如果业务逻辑强依赖于副本变量，则不适合用ThreadLocal解决，需要另寻解决方案。</p>
 <h1 id="用锁来保护对象（可变，共享）"><a href="#用锁来保护对象（可变，共享）" class="headerlink" title="用锁来保护对象（可变，共享）"></a>用锁来保护对象（可变，共享）</h1><ul>
@@ -431,7 +431,7 @@
 <p>条件谓语中包含的变量必须由LOCK守护，并在检查条件谓词和调用await,signal方法时，必须持有lock对象。</p>
 <h2 id="AbstractQueuedSynchronizer-AQS-以后用到再继续补充"><a href="#AbstractQueuedSynchronizer-AQS-以后用到再继续补充" class="headerlink" title="AbstractQueuedSynchronizer(AQS) 以后用到再继续补充"></a>AbstractQueuedSynchronizer(AQS) 以后用到再继续补充</h2><p>ReentrantLock,Semaphore等都是通过继承AQS实现的。AQS的基本操作包括各种形式的获取操作和释放操作，获取操作是一种依赖状态的操作，经常会阻塞，释放操作不是一个可以阻塞的操作。</p>
 <p>AQS负责管理同步器的状态，getState,setState,compareAndSetState等。ReentrantLock用状态表示重入该锁的次数，Semaphore表示剩余的许可数量。</p>
-<p><img src="/2018/07/24/java多线程/img/AQS.png" alt="avatar"></p>
+<p><img src="/2018/07/24/java多线程/AQS.png" alt="avatar"></p>
 <p>tryaquire 步骤</p>
 <ul>
 <li>tryAcquire()尝试直接去获取资源，如果成功则直接返回；这一步就是非公平锁的来源。</li>
@@ -620,7 +620,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

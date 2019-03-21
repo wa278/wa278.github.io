@@ -88,12 +88,12 @@
 <meta property="og:site_name" content="Wang Ao&#39;s blog">
 <meta property="og:description" content="MySQL架构- [Mysql逻辑架构](#mysql逻辑架构) - [表锁和行级锁](#表锁和行级锁)  事务 隔离级别   多版本并发控制(MVCC，实现高并发)   Schema与数据类型优化 优化数据类型 整数类型 字符串类型 BLOB和TEXT类型 使用枚举代替字符串类型 日期和时间类型 范式   创建高性能索引 高性能索引策略 聚簇索引   查询性能优化 优化数据访问 查询执行的基">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/09/06/高性能Mysql/img/Mysql服务器逻辑架构图.png">
-<meta property="og:updated_time" content="2018-11-01T09:58:31.388Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/高性能Mysql/Mysql服务器逻辑架构图.png">
+<meta property="og:updated_time" content="2019-03-21T12:28:47.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能Mysql">
 <meta name="twitter:description" content="MySQL架构- [Mysql逻辑架构](#mysql逻辑架构) - [表锁和行级锁](#表锁和行级锁)  事务 隔离级别   多版本并发控制(MVCC，实现高并发)   Schema与数据类型优化 优化数据类型 整数类型 字符串类型 BLOB和TEXT类型 使用枚举代替字符串类型 日期和时间类型 范式   创建高性能索引 高性能索引策略 聚簇索引   查询性能优化 优化数据访问 查询执行的基">
-<meta name="twitter:image" content="http://yoursite.com/2018/09/06/高性能Mysql/img/Mysql服务器逻辑架构图.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/06/高性能Mysql/Mysql服务器逻辑架构图.png">
 
 
 
@@ -361,7 +361,7 @@
 </li>
 </ul>
 <!-- /TOC -->
-<h1 id="MySQL架构"><a href="#MySQL架构" class="headerlink" title="MySQL架构"></a>MySQL架构</h1><h3 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h3><p><img src="/2018/09/06/高性能Mysql/img/Mysql服务器逻辑架构图.png" alt="avator"></p>
+<h1 id="MySQL架构"><a href="#MySQL架构" class="headerlink" title="MySQL架构"></a>MySQL架构</h1><h3 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h3><p><img src="/2018/09/06/高性能Mysql/Mysql服务器逻辑架构图.png" alt="avator"></p>
 <p>最上层有连接处理，授权认证，安全等功能。</p>
 <p>第二层架构是Mysql的核心服务，包括查询解析，分析，优化，缓存，以及所有的内置函数，所有的跨储存引擎的功能都在这一层实现：存储过程，触发器，视图等。</p>
 <p>第三层包含存储引擎，负责MySQL的数据的存储和提取。服务器通过API和储存引擎通信，屏蔽了不同存储引擎的差异。储存引擎不会解析SQL,也不会互相通信，只是简单的响应上层服务器的请求。</p>
@@ -555,7 +555,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
